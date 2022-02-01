@@ -4,6 +4,15 @@
 
 `docker build -t crv -f Dockerfile-production .`
 
-## Run container
+## Rub container in detached mode
 
-`docker run -p 8080:80 -d crv`
+`docker run --name curve -it -d crv`
+
+## Copy static files from container
+
+`docker cp curve:/app/dist $(pwd)/dist`
+
+## Stop and delete container
+
+`docker stop curve`
+`docker rm curve`
