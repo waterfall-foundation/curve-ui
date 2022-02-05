@@ -125,7 +125,7 @@
 					</tr>
 					<tr v-for='vote in filteredVotes'>
 						<td>
-							<a :href="'https://etherscan.io/address/' + vote.user" rel='noopener noreferrer'>
+							<a :href="'https://explorer.waterfall.network/address/' + vote.user" rel='noopener noreferrer'>
 								{{ shortenAddress(vote.user) }}
 							</a>
 						</td>
@@ -136,12 +136,12 @@
 							{{ formatNumber(vote.totalveCRV / 1e18) }}
 						</td>
 						<td>
-							<a :href="'https://etherscan.io/address/' + vote.gauge" rel='noopener noreferrer'>
+							<a :href="'https://explorer.waterfall.network/address/' + vote.gauge" rel='noopener noreferrer'>
 								{{ getGaugeAddress(vote.gauge) }}
 							</a>
 						</td>
 						<td>
-							<a :href="'https://etherscan.io/tx/' + vote.id" rel='noopener noreferrer'>
+							<a :href="'https://explorer.waterfall.network/tx/' + vote.id" rel='noopener noreferrer'>
 								{{ vote.weight / 100 }}%
 							</a>
 						</td>

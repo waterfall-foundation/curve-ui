@@ -814,7 +814,7 @@
                                 dismiss()
                                 notifyHandler(hash)
                                 this.waitingMessage = `Waiting for withdrawal 
-                                <a href='https://etherscan.io/tx/${hash}'>transaction</a>
+                                <a href='https://explorer.waterfall.network/tx/${hash}'>transaction</a>
                                 to confirm: no further action needed`
                             })
                         }
@@ -845,7 +845,7 @@
                                 dismiss()
                                 notifyHandler(hash)
                                 this.waitingMessage = `Waiting for withdrawal 
-                                <a href='https://etherscan.io/tx/${hash}'>transaction</a>
+                                <a href='https://explorer.waterfall.network/tx/${hash}'>transaction</a>
                                 to confirm: no further action needed`
                             });
                         }
@@ -884,7 +884,7 @@
                                 dismiss()
                                 notifyHandler(hash)
                                 this.waitingMessage = `Waiting for withdrawal 
-                                <a href='https://etherscan.io/tx/${hash}'>transaction</a>
+                                <a href='https://explorer.waterfall.network/tx/${hash}'>transaction</a>
                                 to confirm: no further action needed`
                             });
                         }

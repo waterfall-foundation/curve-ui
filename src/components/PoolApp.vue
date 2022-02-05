@@ -51,8 +51,8 @@
       <div class='poolsdropdown right'>
         <span>?</span>
         <div class='dropdown'>
-          <a :href="'https://etherscan.io/address/' + this.poolAddress" rel='noopener noreferrer'>Pool contract</a>
-          <a :href="'https://etherscan.io/address/' + this.tokenAddress" rel='noopener noreferrer'>Token contract</a>
+          <a :href="'https://explorer.waterfall.network/address/' + this.poolAddress" rel='noopener noreferrer'>Pool contract</a>
+          <a :href="'https://explorer.waterfall.network/address/' + this.tokenAddress" rel='noopener noreferrer'>Token contract</a>
           <p>____________</p>
           <router-link to="/audits">Audits</router-link>
           <router-link to="/events">Events</router-link>

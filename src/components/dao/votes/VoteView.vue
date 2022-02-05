@@ -105,10 +105,10 @@
 
 					</div>
 					<div class='creator'>
-						<b>Proposed by:</b> <a :href="'https://etherscan.io/address/'+vote.creator">{{ shortenAddress(vote.creator) }}</a>
+						<b>Proposed by:</b> <a :href="'https://explorer.waterfall.network/address/'+vote.creator">{{ shortenAddress(vote.creator) }}</a>
 					</div>
 					<div class='executedtx' v-show='vote.transactionHash !== null'>
-						<b>Executed:</b> <a :href="'https://etherscan.io/tx/'+vote.transactionHash">{{ shortenAddress(vote.transactionHash) }}</a>
+						<b>Executed:</b> <a :href="'https://explorer.waterfall.network/tx/'+vote.transactionHash">{{ shortenAddress(vote.transactionHash) }}</a>
 					</div>
 					<div class='votes'>
 						<b>Votes:</b>
@@ -171,7 +171,7 @@
 									<tbody>
 										<tr v-for='cast in forCasts'>
 											<td>
-												<a :href="'https://etherscan.io/address/' + cast.voter" rel='noopener noreferrer'>
+												<a :href="'https://explorer.waterfall.network/address/' + cast.voter" rel='noopener noreferrer'>
 													{{ shortenAddress(cast.voter) }}
 												</a>
 											</td>
@@ -201,7 +201,7 @@
 									<tbody>
 										<tr v-for='cast in againstCasts'>
 											<td>
-												<a :href="'https://etherscan.io/address/' + cast.voter" rel='noopener noreferrer'>
+												<a :href="'https://explorer.waterfall.network/address/' + cast.voter" rel='noopener noreferrer'>
 													{{ shortenAddress(cast.voter) }}
 												</a>
 											</td>
@@ -217,15 +217,15 @@
 						<div class='myvote' v-if='vote.mycasts && vote.mycasts.length'>
 							You voted 
 							<b>
-								<a :href="'https://etherscan.io/tx/' + vote.mycasts[0].transactionHash"> {{ vote.mycasts[0].supports ? 'Yes' : 'No'}}</a> 
+								<a :href="'https://explorer.waterfall.network/tx/' + vote.mycasts[0].transactionHash"> {{ vote.mycasts[0].supports ? 'Yes' : 'No'}}</a>
 							</b> with: <b> {{ voterStake }} </b> veCRV
 							at snapshot block 
-							<a :href="'https://etherscan.io/block/' + vote.snapshotBlock"> <b> {{ vote.snapshotBlock }} </b> </a>
+							<a :href="'https://explorer.waterfall.network/block/' + vote.snapshotBlock"> <b> {{ vote.snapshotBlock }} </b> </a>
 						</div>
 						<div class='myvote info-message gentle-message' v-if='canVote() && (vote.mycasts && !vote.mycasts.length || !vote.mycasts)'>
 							Voting with {{ currentVotingPowerFormat() }} veCRV ({{ myVotingPowerPct }}% of total voting power), you had {{ balanceOfAtFormat }} veCRV
 							at vote creation on snapshot block 
-							<a :href="'https://etherscan.io/block/' + vote.snapshotBlock"> <b> {{ vote.snapshotBlock }} </b> </a>
+							<a :href="'https://explorer.waterfall.network/block/' + vote.snapshotBlock"> <b> {{ vote.snapshotBlock }} </b> </a>
 							<div class='castvote'>
 								<button @click='voteyes'> Yes <span class='loading line' v-show='loadingyes'></span></button>
 								<button @click='voteno'> No <span class='loading line' v-show='loadingno'></span></button>
@@ -233,7 +233,7 @@
 						</div>
 						<div class='myvote info-message gentle-message' v-show='hadNoBalanceAt'>
 							You didn't have enough veCRV balance({{ balanceOfAtFormat}} / {{ MIN_BALANCE }} required) when vote was created on block snapshot 
-							<a :href="'https://etherscan.io/block/' + vote.snapshotBlock"> <b> {{ vote.snapshotBlock }} </b> </a>
+							<a :href="'https://explorer.waterfall.network/block/' + vote.snapshotBlock"> <b> {{ vote.snapshotBlock }} </b> </a>
 							at {{ startDateFormat }}
 							<p>
 								Lock CRV to be able to vote on next proposals in <router-link to='/locker'>Locker page</router-link>
