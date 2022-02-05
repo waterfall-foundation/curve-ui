@@ -7,30 +7,6 @@
       <div class='poolsdropdown'>
         <button class='simplebutton' :class="{'loading line': !initializedContracts && !['Stats', 'FAQ', 'Donate'].includes($route.name)}">[{{poolMenu[currentPool]}}]</button>
         <div class='dropdown'>
-           <!--  <a :href="'//compound.localhost:8080'+$route.path" :class="{selected: currentPool == 'compound'}" @click="changePools('compound')">Compound</a>
-            <a :href="'//usdt.localhost:8080'+$route.path" :class="{selected: currentPool == 'usdt'}" @click="changePools('usdt')">USDT</a>
-            <a :href="'//y.localhost:8080'+$route.path" :class="{selected: currentPool == 'iearn'}" @click="changePools('iearn')">Y</a>
-            <a :href="'//busd.localhost:8080'+$route.path" :class="{selected: currentPool == 'busd'}" @click="changePools('busd')">bUSD</a> -->
-
-            <router-link :to="'/compound/' + ($route.path.split('/')[2] || '')  " :class="{selected: currentPool == 'compound'}">Compound</router-link>
-            <!-- <router-link :to="'/usdt/' + ($route.path.split('/')[2] || '')  " :class="{selected: currentPool == 'usdt'}">USDT</router-link> -->
-            <router-link :to="'/pax/' + ($route.path.split('/')[2] || '') " :class="{selected: currentPool == 'pax'}">PAX</router-link>
-            <router-link :to="'/iearn/' + ($route.path.split('/')[2] || '') " :class="{selected: currentPool == 'iearn'}">Y</router-link>
-            <router-link :to="'/busd/' + ($route.path.split('/')[2] || '')  " :class="{selected: currentPool == 'busd'}">bUSD</router-link>
-            <router-link :to="'/susdv2/' + ($route.path.split('/')[2] || '') " :class="{selected: currentPool == 'susdv2'}">sUSD</router-link>
-            <router-link :to="'/ren/' + ($route.path.split('/')[2] || '')">renBTC</router-link>
-            <router-link :to="'/sbtc/' + ($route.path.split('/')[2] || '')">sBTC</router-link>
-            <!-- <a href="https://iearn.finance/pool">sUSD</a> -->
-            <p>____________</p>
-            <router-link to='/'>Home</router-link>
-            <router-link to='/trade'>Trade</router-link>
-            <router-link to='/combinedstats'>All stats</router-link>
-            <router-link to='/dailystats'>Daily stats</router-link>
-            <router-link to='/volumepercoin'>Coin volumes</router-link>
-            <a href="https://twitter.com/CurveFinance">#Twitter</a>
-            <a href="https://t.me/curvefi">@Telegram</a>
-            <a href="https://explore.duneanalytics.com/public/dashboards/RTH47mNjQcoLv5oG0HMDdI0iDq7BHxk1PzCRdwQB">Dune Analytics</a>
-            <p>____________</p>
             <button class='simplebutton' @click = 'changeWallets'>Change wallet</button>
             <button id='changeAccounts' class='simplebutton' 
               v-show="['ledger', 'trezor'].includes(walletName)" 
