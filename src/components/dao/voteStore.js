@@ -19,7 +19,7 @@ const radspecFormat = {
 			if(!prefix) prefix = ''
 			return {
 				type: 'string',
-				value: '<br> ' + prefix + ' ' + "<a href='https://etherscan.io/address/" + address + "' rel='noopener noreferrer'>" + shortenAddress(address) + '</a>',
+				value: '<br> ' + prefix + ' ' + "<a href='https://explorer.waterfall.network/address/" + address + "' rel='noopener noreferrer'>" + shortenAddress(address) + '</a>',
 			}
 		},
 		param: () => async (param, name) => {

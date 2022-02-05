@@ -57,7 +57,7 @@
 				    	</tr>
 				        <tr v-for='event in paginatedExchanges'>
 				        	<td>
-				        		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				        		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				        			<span class='tooltip'>
 				        				{{ event.timestamp && formatTime(event.timestamp) }}
 				        				<span class='tooltiptext'>
@@ -67,42 +67,42 @@
 				        		</a>
 				        	</td>
 				        	<td>
-				        		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				        		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				        			{{ event.blockNumber }}
 				        		</a>
 				        	</td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ event.fromCurrency }}➔{{ event.toCurrency }}
 				            	</a>
 				            </td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ isBTC(event) ? event.soldAmount.toFixed(8) : event.soldAmount.toFixed(2) }}
 				            	</a>
 				            </td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ isBTC(event) ? event.boughtAmount.toFixed(8) : event.boughtAmount.toFixed(2) }}
 				            	</a>
 				            </td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ getPool(event) }}
 				            	</a>
 				            </td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ event.event }}
 				            	</a>
 		            	 	</td>
 		            	 	<!-- <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 		            	 			{{ event.virtual_price}}
 		            	 		</a>
 		            	 	</td> -->
  		            	 	<td>
-		            	 		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+		            	 		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 		            	 			{{ (event.yield * 10000).toFixed(4) }} bps
 		            	 		</a>
 		            	 	</td>
@@ -115,61 +115,61 @@
 			        		<div>
 			        			Time:
 
-			        			<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			        			<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			        				{{ event.timestamp && formatDateTime(event.timestamp) }}
 			        			</a>
 			        		</div>
 			        		<div>
 			        			Block #:
 
-			        			<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			        			<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			        			{{ event.blockNumber }}
 			        			</a>
 			        		</div>
 			            	<div>
 			            		Swap:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            		{{ event.fromCurrency }}➔{{ event.toCurrency }}
 			            		</a>
 			            	</div>
 			            	<div>
 			            		tokens sold:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            		{{ isBTC(event) ? event.soldAmount.toFixed(8) : event.soldAmount.toFixed(2) }}
 			            		</a>
 			            	</div>
 			            	<div>
 			            		tokens bought:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            		{{ isBTC(event) ? event.boughtAmount.toFixed(8) : event.boughtAmount.toFixed(2) }}
 			            		</a>
 			            	</div>
 			            	<div>
 			            		Pool:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            		{{ getPool(event) }}
 			            		</a>
 			            	</div>
 			            	<div>
 			            		Event:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            		{{ event.event }}
 			            		</a>
 			            	</div>
 	            	 	<!-- <td>
-			            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 	            	 			{{ event.virtual_price}}
 	            	 		</a>
 	            	 	</td> -->
 	            	 		<div>
 	            	 			Yield:
 
-	            	 			<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+	            	 			<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 	            	 			{{ (event.yield * 10000).toFixed(4) }} bps
 	            	 			</a>
 	            	 		</div>
@@ -194,7 +194,7 @@
 				    	</tr>
 				        <tr v-for='event in paginatedExchanges'>
 				        	<td>
-				        		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				        		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				        			<span class='tooltip'>
 				        				{{ event.timestamp && formatTime(event.timestamp) }}
 				        				<span class='tooltiptext'>
@@ -204,22 +204,22 @@
 				        		</a>
 				        	</td>
 				        	<td>
-				        		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				        		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				        			{{ event.blockNumber }}
 				        		</a>
 				        	</td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ formatAddress(event.returnValues.provider) }}
 				            	</a>
 				            </td>
 				            <!-- <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ event.returnValues.invariant / 1e18 }}
 				            	</a>
 				            </td> -->
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		<div class='tooltip'>
 				            			{{ isBTC(event) ? totalAmount(event).toFixed(8) : totalAmount(event).toFixed(2) }}
 				            			<div class='tooltiptext'>
@@ -231,12 +231,12 @@
 				            	</a>
 				            </td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ getPool(event) }}
 				            	</a>
 				            </td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ event.returnValues.token_supply ? (event.returnValues.token_supply / 1e18).toFixed(2) : 'N/A' }}
 				            	</a>
 				            </td>
@@ -249,28 +249,28 @@
 			        		<div>
 			        			Time:
 
-			        			<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			        			<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			        			{{ event.timestamp && formatDateTime(event.timestamp) }}
 			        			</a>
 			        		</div>
 			        		<div>
 			        			Block #:
 
-			        			<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			        			<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			        			{{ event.blockNumber }}
 			        			</a>
 			        		</div>
 			            	<div>
 			            		Provider:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            			{{ formatAddress(event.returnValues.provider) }}
 			            		</a>
 			            	</div>
 			            	<div>
 			            		tokens amounts:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            			<div class='tooltip'>
 				            			{{ isBTC(event) ? totalAmount(event).toFixed(8) : totalAmount(event).toFixed(2) }}
 				            			<div class='tooltiptext'>
@@ -288,14 +288,14 @@
 			            	<div>
 			            		Pool:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            			{{ getPool(event) }}
 			            		</a>
 			            	</div>
 			            	<div>
 			            		Token supply:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            			{{ event.returnValues.token_supply ? (event.returnValues.token_supply / 1e18).toFixed(2) : 'N/A' }}
 			            		</a>
 			            	</div>
@@ -321,27 +321,27 @@
 				    	</tr>
 				        <tr v-for='event in paginatedExchanges'>
 				        	<td>
-				        		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				        		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				        			{{ event.timestamp && formatTime(event.timestamp) }}
 				        		</a>
 				        	</td>
 				        	<td>
-				        		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				        		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				        			{{ event.blockNumber }}
 				        		</a>
 				        	</td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ formatAddress(event.returnValues.provider) }}
 				            	</a>
 				            </td>
 				            <!-- <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ event.returnValues.invariant / 1e18 }}
 				            	</a>
 				            </td> -->
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		<div class='tooltip'>
 				            			{{ isBTC(event) ? totalAmount(event).toFixed(8) : totalAmount(event).toFixed(2) }}
 				            			<div class='tooltiptext'>
@@ -353,17 +353,17 @@
 				            	</a>
 				            </td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ getPool(event) }}
 				            	</a>
 				            </td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ event.event }}
 				            	</a>
 				            </td>
 				            <td>
-				            	<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+				            	<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ event.returnValues.token_supply ? (event.returnValues.token_supply / 1e18).toFixed(2) : 'N/A' }}
 				            	</a>
 				            </td>
@@ -376,28 +376,28 @@
 			        		<div>
 			        			Time:
 
-			        			<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			        			<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			        			{{ event.timestamp && formatDateTime(event.timestamp) }}
 			        			</a>
 			        		</div>
 			        		<div>
 			        			Block #:
 
-			        			<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			        			<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			        			{{ event.blockNumber }}
 			        			</a>
 			        		</div>
 			            	<div>
 			            		Provider:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            			{{ formatAddress(event.returnValues.provider) }}
 			            		</a>
 			            	</div>
 			            	<div>
 			            		tokens amounts:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            			<div class='tooltip'>
 				            			{{ isBTC(event) ? totalAmount(event).toFixed(8) : totalAmount(event).toFixed(2) }}
 				            			<div class='tooltiptext'>
@@ -417,21 +417,21 @@
 			            	<div>
 			            		Pool:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            			{{ getPool(event) }}
 			            		</a>
 			            	</div>
 			            	<div>
 			            		Event:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 				            		{{ event.event }}
 			            		</a>
 			            	</div>
 			            	<div>
 			            		Token supply:
 
-			            		<a :href="`https://etherscan.io/tx/${event.transactionHash}`">
+			            		<a :href="`https://explorer.waterfall.network/tx/${event.transactionHash}`">
 			            			{{ event.returnValues.token_supply ? (event.returnValues.token_supply / 1e18).toFixed(2) : 'N/A' }}
 			            		</a>
 			            	</div>

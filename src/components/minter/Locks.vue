@@ -55,7 +55,7 @@
 					</tr>
 					<tr v-for='lock in filteredLocks'>
 						<td>
-							<a :href="'https://etherscan.io/tx/' + lock.startTx" rel='noopener noreferrer'>
+							<a :href="'https://explorer.waterfall.network/tx/' + lock.startTx" rel='noopener noreferrer'>
 								<span v-show='lock.lock_start > 0'>
 									{{ formatDateToHuman(lock.lock_start) }}
 								</span>
@@ -65,7 +65,7 @@
 							</a>
 						</td>
 						<td>
-							<a :href="'https://etherscan.io/address/' + lock.user" rel='noopener noreferrer'>
+							<a :href="'https://explorer.waterfall.network/address/' + lock.user" rel='noopener noreferrer'>
 								{{ shortenAddress(lock.user) }}
 							</a>
 						</td>

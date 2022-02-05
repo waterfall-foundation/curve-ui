@@ -35,26 +35,19 @@
       </div>
       <router-link to="/curvepay">Pay</router-link>
       <router-link to="/risks">Risks</router-link>
-      <div class='poolsdropdown right'>
-        <span>?</span>
-        <div class='dropdown'>
-          <router-link to="/audits">Audits</router-link>
-          <router-link to="/events">Events</router-link>
-          <router-link to="/contracts">Contracts</router-link>
-          <router-link to="/bugbounty">Bug Bounty</router-link>
-          <router-link to="/rootfaq">FAQ</router-link>
-          <router-link to="/integrations">Integrations</router-link>
-          <router-link to="/donate">Donate</router-link>
-          <a href='https://guides.curve.fi' rel='noopener noreferrer'>Guides</a>
-          <p>____________</p>
-          <a href="https://twitter.com/CurveFinance" rel='noopener noreferrer'>#Twitter</a>
-          <a href="https://t.me/curvefi" rel='noopener noreferrer'>@Telegram</a>
-          <a href="https://explore.duneanalytics.com/public/dashboards/RTH47mNjQcoLv5oG0HMDdI0iDq7BHxk1PzCRdwQB" rel='noopener noreferrer'>Dune Analytics</a>
-          <p>____________</p>
-          <a href="https://github.com/curvefi/curve-contract">git@</a>
-          <a href="https://github.com/pengiundev/curve-vue">git@UI</a>
-        </div>
-      </div>
+<!--      <div class='poolsdropdown right'>-->
+<!--        <span>?</span>-->
+<!--        <div class='dropdown'>-->
+<!--          <router-link to="/audits">Audits</router-link>-->
+<!--          <router-link to="/events">Events</router-link>-->
+<!--          <router-link to="/contracts">Contracts</router-link>-->
+<!--          <router-link to="/bugbounty">Bug Bounty</router-link>-->
+<!--          <router-link to="/rootfaq">FAQ</router-link>-->
+<!--          <router-link to="/integrations">Integrations</router-link>-->
+<!--          <router-link to="/donate">Donate</router-link>-->
+<!--          <a href='https://guides.curve.fi' rel='noopener noreferrer'>Guides</a>-->
+<!--        </div>-->
+<!--      </div>-->
       <router-link to="/combinedstats" class='showmobile'>Stats</router-link>
       <router-link to="/dailystats" class='showmobile'>Daily stats</router-link>
       <router-link to="/volumepercoin" class='showmobile'>Coin volumes</router-link>
@@ -73,9 +66,6 @@
       <a href="https://github.com/curvefi/curve-contract" class='showmobile'>git@</a>
       <a href="https://github.com/pengiundev/curve-vue" class='showmobile'>git@UI</a>
       <button class='simplebutton showmobile' @click = 'changeWallets'>Change wallet</button>
-      <button id='changeAccounts' class='simplebutton showmobile' 
-        v-show="['ledger', 'trezor'].includes(walletName)" 
-        @click = 'changeAccounts'>Change accounts</button>
     </div>
     <div id="screen">
         <div :class="'blue window ' + $route.name">
@@ -87,11 +77,7 @@
         <router-view/>
     </div>
     <footer>
-      <a href="https://twitter.com/CurveFinance" rel='noopener noreferrer'>#Twitter</a>
-      <a href="https://t.me/curvefi" rel='noopener noreferrer'>@Telegram</a>
-      <a href="https://explore.duneanalytics.com/public/dashboards/RTH47mNjQcoLv5oG0HMDdI0iDq7BHxk1PzCRdwQB" rel='noopener noreferrer'>Dune Analytics</a>
-      <a href="https://github.com/curvefi/curve-contract">git@</a>
-      <a href="https://github.com/pengiundev/curve-vue">git@UI</a>
+      <a href="https://explorer.waterfall.network">Waterfall network explorer</a>
     </footer>
   </div>
 </template>

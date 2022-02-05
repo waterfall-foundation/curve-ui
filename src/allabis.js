@@ -1838,13 +1838,14 @@ old_swap_abi: [
 
 }
 
-var test3 = {
+export let test3 = {
  N_COINS: 3,
  coin_precisions: [1e18, 1e18, 1e18],
  swap_address: '0xB25EC166697f656e8A0962C520788cC75aC89249',
  token_address: '0xA2b08EdB08D98B2c3da234e31B940f7F37E45fD9',
  migration_address: '0x54Ee22d5593FC76fB20EafAb66C45aAb3268B800',
  infura_url: 'https://rpc.waterfall.network/rpc',
+ is_plain: [true, true, true],
  coins: [
   '0x219ed1326b82c468f825cbD727dbaf66810a619C',
   '0x41D062A6AB259E07D96DB88E7BbfC0840f8584c1',

@@ -4,10 +4,10 @@
 	            <legend>Contracts</legend>
 	            <fieldset>
 	            	<legend>Curve Pool Registry</legend>
-	                	<a href = "https://etherscan.io/address/0x7002B727Ef8F5571Cb5F9D70D13DBEEb4dFAe9d1">
+	                	<a href = "https://explorer.waterfall.network/address/0x7002B727Ef8F5571Cb5F9D70D13DBEEb4dFAe9d1">
 	                		<img class='icon' :src="publicPath + 'curveIcons/curve-registry.svg'"> <span class='text'>Curve Registry address</span>
 	                	</a>
-	                	<a href = "https://etherscan.io/address/0xc1DB00a8E5Ef7bfa476395cdbcc98235477cDE4E">
+	                	<a href = "https://explorer.waterfall.network/address/0xc1DB00a8E5Ef7bfa476395cdbcc98235477cDE4E">
 	                		<img class='icon' :src="publicPath + 'curveIcons/curve-registry.svg'"> <span class='text'>Curve calc address</span>
 	                	</a>
 	                	<a href = "https://github.com/curvefi/curve-pool-registry/blob/b17/doc/notebook/playbook.ipynb">
@@ -17,14 +17,14 @@
 	            </fieldset>
 	            <fieldset v-for = '(addresses, i) in contractAddresses'>
 	            	<legend>{{allPools[i]}}</legend>
-	                	<a :href = "'https://etherscan.io/address/' + addresses.swap">
+	                	<a :href = "'https://explorer.waterfall.network/address/' + addresses.swap">
 	                		<img class='icon' :src="getTokenUrl(i)"> <span class='text'>swap address</span>
 	                	</a>
-	                	<a :href = "'https://etherscan.io/address/' + addresses.token">
+	                	<a :href = "'https://explorer.waterfall.network/address/' + addresses.token">
 	                		<img class='icon' :src="getTokenUrl(i)"> 
 	                		<span class='text'>[{{tokenNames[i].ticker}}] {{tokenNames[i].name}} token address</span>
 	                	</a>
-	                	<a :href = "'https://etherscan.io/address/' + depositZaps[i].deposit" v-show="!['ren', 'sbtc'].includes(allPools[i])">
+	                	<a :href = "'https://explorer.waterfall.network/address/' + depositZaps[i].deposit" v-show="!['ren', 'sbtc'].includes(allPools[i])">
 	                		<img class='icon' :src="getTokenUrl(i)"> <span class='text'>deposit address</span>
 	                	</a>
 	            </fieldset>

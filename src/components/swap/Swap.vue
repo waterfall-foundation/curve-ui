@@ -52,7 +52,6 @@
                                     <span v-show="!swapwrapped && !['tbtc', 'ren', 'sbtc'].includes(currentPool)">{{currency | capitalize}}</span>
                                     <span v-show="swapwrapped || ['tbtc', 'ren', 'sbtc'].includes(currentPool)">{{currencies[currency]}}</span>
                                 </label>
-                            </label>
                             </li>
                         </ul>
                     </fieldset>
@@ -87,7 +86,6 @@
                                     <span v-show="!swapwrapped && !['tbtc', 'ren'].includes(currentPool)">{{currency | capitalize}}</span>
                                     <span v-show="swapwrapped || ['tbtc', 'ren'].includes(currentPool)">{{currencies[currency]}}</span>
                                 </label>
-                            </label>
                             </li>
                         </ul>
                     </fieldset>
@@ -102,7 +100,7 @@
                         {{exchangeRateSwapped}}
                     </span>
                 </p>
-                <div id='max_slippage'><span>Max slippage:</span> 
+                <div id='max_slippage'><span>Max slippage:</span>
                     <input id="slippage05" type="radio" name="slippage" value='0.005' @click='maxSlippage = 0.5; customSlippageDisabled = true'>
                     <label for="slippage05">0.5%</label>
 
@@ -137,9 +135,6 @@
                 <p class='trade-buttons' v-show="['ren', 'sbtc'].includes(currentPool)">
                     <a href='https://bridge.renproject.io/'>Mint/redeem renBTC</a>
                 </p>
-                <!-- <p class='simple-error' id='no-balance-synth' v-show='notEnoughBalanceSynth'>
-                    Max balance you can use is {{ (+maxSynthBalance).toFixed(2) }}
-                </p> -->
                 <p class='trade-buttons'>
                     <button id="trade" @click='handle_trade'>
                         Sell <span class='loading line' v-show='loadingAction'></span>
@@ -155,12 +150,11 @@
                     <span v-show='swapwrapped'>{{Object.values(currencies)[from_currency]}}</span>. <span>Swap is not available.</span>
                 </p>
                 <div class='simple-error pulse' v-show="susdWaitingPeriod">
-                    Cannot transfer {{ currentPool == 'susdv2' ? 'sUSD' : 'sBTC' }} during waiting period. {{ (susdWaitingPeriodTime).toFixed(0) }} secs left.
+                    Cannot transfer {{ 'sBTC' }} during waiting period. {{ (susdWaitingPeriodTime).toFixed(0) }} secs left.
                 </div>
                 <div class='info-message gentle-message' v-show='estimateGas'>
                     Estimated tx cost: {{ (estimateGas * gasPrice / 1e9 * ethPrice).toFixed(2) }}$
                 </div>
-
             </div>
         </div>
 </div>
@@ -568,7 +562,7 @@
                             dismiss()
                             notifyHandler(hash)
                             this.waitingMessage = `Waiting for swap 
-                                                    <a href='https://etherscan.io/tx/${hash}'>transaction</a>
+                                                    <a href='https://explorer.waterfall.network/tx/${hash}'>transaction</a>
                                                     to confirm: no further action needed`
                         })
                 }

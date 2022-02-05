@@ -1,15 +1,26 @@
+<!--<template>-->
+<!--    <div class="window white">-->
+<!--        <fieldset>-->
+<!--			<legend>Total pool deposits and daily volume</legend>-->
+<!--				<div :class="{'loading line': !total}" id='total-balances'>-->
+<!--					Deposits: <span v-show='total'>{{total | formatNumber}}$</span>-->
+<!--				</div>-->
+<!--				<div :class="{'loading line': volume < 0}" >-->
+<!--					Daily volume: <span v-show='volume >= 0'>{{(volume | 0) | formatNumber(0)}}$</span>-->
+<!--				</div>-->
+<!--        </fieldset>-->
+<!--    </div>-->
+<!--</template>-->
+
 <template>
-    <div class="window white">
-        <fieldset>
-			<legend>Total pool deposits and daily volume</legend>
-				<div :class="{'loading line': !total}" id='total-balances'>
-					Deposits: <span v-show='total'>{{total | formatNumber}}$</span>
-				</div>
-				<div :class="{'loading line': volume < 0}" >
-					Daily volume: <span v-show='volume >= 0'>{{(volume | 0) | formatNumber(0)}}$</span>
-				</div>
-        </fieldset>
-    </div>
+  <div class="window white">
+    <fieldset>
+      <legend>Disclaimer</legend>
+      <div>
+        This site is for demo and testing purposes only and this technology is still in a test mode and needs more profound elaboration to be released as a ready-made product.
+      </div>
+    </fieldset>
+  </div>
 </template>
 
 <script>
@@ -73,7 +84,7 @@
 			    this.total = total.toFixed(0);
 			},
 			async dailyVolume() {
-				var pools = ['compound', 'usdt', 'y', 'busd', 'susd', 'pax', 'tbtc', 'ren', 'sbtc']
+				var pools = ['test']
 	            await volumeStore.getVolumes(pools);
 			}
 		}

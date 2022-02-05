@@ -9,25 +9,11 @@
     import { capitalizeFirstLetter } from './utils/helpers'
 
     const descriptions = {
-      test3: 'Literally just test foe WWAT/Alex/Serg',
-    	compound: 'A curve.fi portal for swapping cDAI/cUSDC',
-    	usdt: 'A curve.fi Tethered portal for swapping cDAI/cUSDC/USDT',
-    	iearn: 'A curve.fi yTokens portal for swapping DAI/USDC/USDT/TUSD',
-    	busd: 'A curve.fi portal for swapping BUSD and other stablecoins',
+      test3: 'Literally just test for WWAT/Alex/Serg',
     }
 
     const titles = {
       test3: 'Test pool',
-    	compound: 'Compounded',
-    	usdt: 'Tethered',
-    	iearn: 'Yield',
-    	busd: 'bUSD',
-    	susd: 'sUSD-yCurve old',
-    	susdv2: 'sUSD',
-      pax: 'PAX',
-      tbtc: 'TBTC',
-      ren: 'renBTC',
-      sbtc: 'sBTC',
     }
 
 	export default {
@@ -43,8 +29,8 @@
 				]
 			}
 		},
-        computed: {
-          ...getters,
-        },
+    computed: {
+      ...getters,
+    },
 	}
 </script>

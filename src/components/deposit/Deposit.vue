@@ -558,7 +558,7 @@
                         notifyHandler(hash)
                         this.waitingMessage = 
                         `Waiting for deposit 
-                            <a href='http://etherscan.io/tx/${hash}'>transaction</a> 
+                            <a href='http://explorer.waterfall.network/tx/${hash}'>transaction</a>
                             to confirm ${stake ? 'before staking' : 'no further action required'}`
                     })
 				    try {
@@ -591,7 +591,7 @@
 					.once('transactionHash', hash => {
                         notifyHandler(hash)
 						this.waitingMessage = `Waiting for deposit 
-                            <a href='http://etherscan.io/tx/${hash}'>transaction</a>
+                            <a href='http://explorer.waterfall.network/tx/${hash}'>transaction</a>
                             to confirm ${stake ? 'before staking (1/2)' : 'no further action required'}`
 						console.warn(hash, 'tx hash')
 					})

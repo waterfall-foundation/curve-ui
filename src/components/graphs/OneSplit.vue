@@ -90,14 +90,8 @@
             <p v-show='fromInput > 0' class='best-pool-text'>
                 Trade routed through:
                 <span id="best-pool">
-                    <span v-show="bestPoolText != '1split'">
+                    <span>
                         {{bestPoolText}}
-                    </span>
-                    <span v-show="bestPoolText == '1split'">
-                        {{bestPoolText}}
-                        <span class='tooltip'> [?]
-                            <span class='tooltiptext' v-html = 'distributionText'></span>
-                        </span>
                     </span>
                 </span>
             </p>
@@ -296,7 +290,7 @@
                 // if((this.from_currency == 6 && [3,4,5].includes(this.to_currency)) 
                 //     || (this.to_currency == 6 && [3,4,5].includes(this.from_currency))) return 'Not Available'
                 if(this.bestPool === null) return 'Not available'
-                return ['compound', 'y', 'busd', 'susd', 'pax', 'ren', 'sbtc', '1split'][this.bestPool]
+                return ['test3',][this.bestPool]
             },
             selldisabled() {
                 return false;
@@ -579,7 +573,7 @@
                     .once('transactionHash', hash => {
                         notifyHandler(hash)
                         this.waitingMessage = `Waiting for swap
-                                                <a href='https://etherscan.io/tx/${hash}'>transaction</a>
+                                                <a href='https://explorer.waterfall.network/tx/${hash}'>transaction</a>
                                                 to confirm: no further action needed`
                     })
                 } catch(err) {
@@ -688,7 +682,6 @@
                                                                 calls[decoded.indexOf(max)][1].slice(10))
                 this.usedFlags = decodedCall[4]
                 this.usedParts = decodedCall[3]
-                console.log(max, "1split swap", this.underlying_coins[this.from_currency], this.underlying_coins[this.to_currency])
 
                 let amount_dy = max[0];
                 let exchangeRate = BN(amount_dy).div(this.precisions(this.to_currency)).div(this.fromInput)
@@ -843,9 +836,7 @@
                 this.swap = []
                 this.addresses = []
                 let abis = Object.keys(contractAbis).filter(p => p != 'susd' && p != 'y')
-              console.log(abis)
                 for(const pool of abis) {
-                  console.log(contractAbis[pool].swap_abi[0])
                   this.swap.push(new contract.web3.eth.Contract(contractAbis[pool].swap_abi, contractAbis[pool].swap_address))
                   this.addresses.push({address: contractAbis[pool].swap_address, pool: pool})
                 }

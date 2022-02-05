@@ -11,10 +11,10 @@
 	            <div v-show='showContracts == 1'>
 		            <fieldset>
 		            	<legend>Curve Pool Registry</legend>
-		                	<a href = "https://etherscan.io/address/0x7002B727Ef8F5571Cb5F9D70D13DBEEb4dFAe9d1">
+		                	<a href = "https://explorer.waterfall.network/address/0x7002B727Ef8F5571Cb5F9D70D13DBEEb4dFAe9d1">
 		                		<img class='icon' :src="publicPath + 'curveIcons/curve-registry.svg'"> <span class='text'>Curve Registry address</span>
 		                	</a>
-		                	<a href = "https://etherscan.io/address/0xc1DB00a8E5Ef7bfa476395cdbcc98235477cDE4E">
+		                	<a href = "https://explorer.waterfall.network/address/0xc1DB00a8E5Ef7bfa476395cdbcc98235477cDE4E">
 		                		<img class='icon' :src="publicPath + 'curveIcons/curve-registry.svg'"> <span class='text'>Curve calc address</span>
 		                	</a>
 		                	<a href = "https://github.com/curvefi/curve-pool-registry/blob/b17/doc/notebook/playbook.ipynb">
@@ -27,32 +27,32 @@
 		                	<a href = "https://app.nexusmutual.io/#/SmartContractCover">
 		                		<img class='icon' :src="publicPath + 'curveIcons/nexusmutual.png'"> <span class='text'>Stablecoin pools - curvev2.nexusmutual.eth</span>
 		                	</a>
-		                	<a href = "https://etherscan.io/address/0xc1DB00a8E5Ef7bfa476395cdbcc98235477cDE4E">
+		                	<a href = "https://explorer.waterfall.network/address/0xc1DB00a8E5Ef7bfa476395cdbcc98235477cDE4E">
 		                		<img class='icon' :src="publicPath + 'curveIcons/nexusmutual.png'"> <span class='text'>BTC pools - curvebtc.nexusmutual.eth</span>
 		                	</a>
 		            </fieldset>
 		            <fieldset v-for = '(addresses, i) in contractAddresses'>
 		            	<legend>{{allPools[i]}}</legend>
-		                	<a :href = "'https://etherscan.io/address/' + addresses.swap">
+		                	<a :href = "'https://explorer.waterfall.network/address/' + addresses.swap">
 		                		<img class='icon' :src="getTokenUrl(i)"> <span class='text'>swap address</span>
 		                	</a>
-		                	<a :href = "'https://etherscan.io/address/' + addresses.token">
+		                	<a :href = "'https://explorer.waterfall.network/address/' + addresses.token">
 		                		<img class='icon' :src="getTokenUrl(i)"> 
 		                		<span class='text'>[{{tokenNames[i].ticker}}] {{tokenNames[i].name}} token address</span>
 		                	</a>
-		                	<a :href = "'https://etherscan.io/address/' + depositZaps[i].deposit" v-show="!['ren', 'sbtc'].includes(allPools[i])">
+		                	<a :href = "'https://explorer.waterfall.network/address/' + depositZaps[i].deposit" v-show="!['ren', 'sbtc'].includes(allPools[i])">
 		                		<img class='icon' :src="getTokenUrl(i)"> <span class='text'>deposit address</span>
 		                	</a>
-		                	<a :href= "'https://etherscan.io/address/' + rewardsAddresses[allPools[i]]" v-show="['susdv2', 'sbtc', 'y', 'iearn'].includes(allPools[i])">
+		                	<a :href= "'https://explorer.waterfall.network/address/' + rewardsAddresses[allPools[i]]" v-show="['susdv2', 'sbtc', 'y', 'iearn'].includes(allPools[i])">
 		                		<img class='icon' :src="getTokenUrl(i)"> <span class='text'>staking rewards address</span>
 		                	</a>
-		                	<a href="https://etherscan.io/address/0x9fe350DfA5F66bC086243F21A8F0932514316627" v-show="['ren'].includes(allPools[i])">
+		                	<a href="https://explorer.waterfall.network/address/0x9fe350DfA5F66bC086243F21A8F0932514316627" v-show="['ren'].includes(allPools[i])">
 		                		<img class='icon' :src="getTokenUrl(i)"> <span class='text'>old adapter address</span>
 		                	</a>
-		                	<a :href="'https://etherscan.io/address/' + adapterAddresses[allPools[i]]" v-show="['ren','sbtc'].includes(allPools[i])">
+		                	<a :href="'https://explorer.waterfall.network/address/' + adapterAddresses[allPools[i]]" v-show="['ren','sbtc'].includes(allPools[i])">
 		                		<img class='icon' :src="getTokenUrl(i)"> <span class='text'>adapter address</span>
 		                	</a>
-		                	<a href='https://etherscan.io/token/0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e' v-show="['y', 'iearn'].includes(allPools[i])">
+		                	<a href='https://explorer.waterfall.network/token/0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e' v-show="['y', 'iearn'].includes(allPools[i])">
 		                		<img class='icon' :src="publicPath + 'curveIcons/yfi.png'">
 		                		YFI token
 		                	</a>
@@ -61,22 +61,22 @@
 	        	<div v-show='showContracts == 3'>
 		            <fieldset>
 		            	<legend>Curve DAO</legend>
-		                	<a href = "https://etherscan.io/address/0xD533a949740bb3306d119CC777fa900bA034cd52">
+		                	<a href = "https://explorer.waterfall.network/address/0xD533a949740bb3306d119CC777fa900bA034cd52">
 		                		<img class='icon' :src="publicPath + 'logo.png'"> <span class='text'>CRV token</span>
 		                	</a>
-		                	<a href = "https://etherscan.io/address/0x5f3b5DfEb7B28CDbD7FAba78963EE202a494e2A2">
+		                	<a href = "https://explorer.waterfall.network/address/0x5f3b5DfEb7B28CDbD7FAba78963EE202a494e2A2">
 		                		<span class='text'>Voting Escrow</span>
 		                	</a>
-		                	<a href = "https://etherscan.io/address/0x575ccd8e2d300e2377b43478339e364000318e2c">
+		                	<a href = "https://explorer.waterfall.network/address/0x575ccd8e2d300e2377b43478339e364000318e2c">
 		                		<span class='text'>Vesting Escrow</span>
 		                	</a>
-		                	<a href = "https://etherscan.io/address/0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB">
+		                	<a href = "https://explorer.waterfall.network/address/0x2F50D538606Fa9EDD2B11E2446BEb18C9D5846bB">
 		                		<span class='text'>Gauge Controller</span>
 		                	</a>
-		                	<a href = "https://etherscan.io/address/0xd061D61a4d941c39E5453435B6345Dc261C2fcE0">
+		                	<a href = "https://explorer.waterfall.network/address/0xd061D61a4d941c39E5453435B6345Dc261C2fcE0">
 		                		<span class='text'>Minter</span>
 		                	</a>
-		                	<a href = "https://etherscan.io/address/0x6e8f6D1DA6232d5E40b0B8758A0145D6C5123eB7">
+		                	<a href = "https://explorer.waterfall.network/address/0x6e8f6D1DA6232d5E40b0B8758A0145D6C5123eB7">
 		                		<span class='text'>Pool Proxy</span>
 		                	</a>
 		            </fieldset>
@@ -94,7 +94,7 @@
 		            		{{allPools[i]}} gauge
 		            		<span v-show="allPools[i] == 'usdt'">(disabled)</span>
 		            	</legend>
-		                	<a :href = "'https://etherscan.io/address/' + addresses.address" :class="{'disabledGauge': allPools[i] == 'usdt'}">
+		                	<a :href = "'https://explorer.waterfall.network/address/' + addresses.address" :class="{'disabledGauge': allPools[i] == 'usdt'}">
 		                		<img class='icon' :src="getTokenUrl(i)"> <span class='text'>{{allPools[i]}} Gauge address</span>
 		                	</a>
 		            </fieldset>

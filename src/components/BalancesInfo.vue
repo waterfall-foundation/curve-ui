@@ -27,7 +27,7 @@
             <span id='fee-info' :class="{'loading line': !fee}">
             </span>
             <span v-show = 'fee'> {{fee && fee.toFixed(3)}}</span>
-          </span>%
+          </li>
           <li>
             <b>Admin fee:</b> 
             <span id='admin-fee-info' :class="{'loading line': admin_fee}"> {{admin_fee && admin_fee.toFixed(3)}}</span>%
@@ -116,32 +116,32 @@
       </p>
     </fieldset>
 
-    <fieldset id="lp-info-container" v-show='totalShare > 0 && initializedContracts'>
-      <legend>My share: ( {{(totalBalance / totalSupply * 100).toFixed(3)}}% of pool)</legend>
-      <ul id='lp-info'>
-          <li v-for='(currency, i) in Object.keys(currencies)'>
-            <b>{{currency | capitalize}}:</b> 
-            <span> {{l_info && toFixed(l_info[i])}}</span></li>
-          <li>
-            <b>{{totalCurrencies(currencies)}}:</b> 
-            <span :class="{'loading line': totalUserBalances === null}"> {{toFixed(totalUserBalances)}}</span>
-          </li>
-          <li>
-            <b>USD balance:</b> 
+<!--    <fieldset id="lp-info-container" v-show='totalShare > 0 && initializedContracts'>-->
+<!--      <legend>My share: ( {{(totalBalance / totalSupply * 100).toFixed(3)}}% of pool)</legend>-->
+<!--      <ul id='lp-info'>-->
+<!--          <li v-for='(currency, i) in Object.keys(currencies)'>-->
+<!--            <b>{{currency | capitalize}}:</b> -->
+<!--            <span> {{l_info && toFixed(l_info[i])}}</span></li>-->
+<!--          <li>-->
+<!--            <b>{{totalCurrencies(currencies)}}:</b> -->
+<!--            <span :class="{'loading line': totalUserBalances === null}"> {{toFixed(totalUserBalances)}}</span>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <b>USD balance:</b> -->
 
-            <span>
-               <span :class="{'loading line': realShare === null}"> 
-                <span v-show="realShare !== null">
-                  {{realShare | toFixed2 | formatNumber}}
-                </span>
-              </span>
-            </span>
-          </li>
-          <li>
-            <b>Averaged USD balance:</b> {{ usdShare1 | formatNumber(2) }}
-          </li>
-      </ul>
-    </fieldset>
+<!--            <span>-->
+<!--               <span :class="{'loading line': realShare === null}"> -->
+<!--                <span v-show="realShare !== null">-->
+<!--                  {{realShare | toFixed2 | formatNumber}}-->
+<!--                </span>-->
+<!--              </span>-->
+<!--            </span>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <b>Averaged USD balance:</b> {{ usdShare1 | formatNumber(2) }}-->
+<!--          </li>-->
+<!--      </ul>-->
+<!--    </fieldset>-->
     <fieldset id="lp-info-container" v-show="totalStake > 0 && initializedContracts && ['susdv2', 'sbtc'].includes(currentPool)">
       <legend>Staked share: ( {{(totalStake / totalSupply * 100).toFixed(3)}}% of pool)</legend>
       <ul id='stakelp-info'>

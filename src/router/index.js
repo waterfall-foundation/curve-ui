@@ -458,23 +458,22 @@ router.beforeEach(async (to, from, next) => {
   let subdomain;
   if(pools.includes(to.path.split('/')[1])) subdomain = to.path.split('/')[1]
   else subdomain = window.location.hostname.split('.')[0]
-
   if(!pools.includes(subdomain)) subdomain = 'test3'
 
   currentContract.swapbtc = false
 
   if((currentContract.currentContract != subdomain && !['Stats', 'FAQ', 'Donate'].includes(to.name)) || ['Stats', 'FAQ', 'Donate'].includes(from.name)) {
-    changeContract(subdomain)
+    console.log("1")
+    await changeContract(subdomain)
     currentContract.currentContract = subdomain
-    next();
-  }
-  else if(!['Stats', 'FAQ', 'Donate'].includes(to.name)) {
-    next();
-    if(!currentContract.initializedContracts) {
-      await init(subdomain);
-    }
-  }
-  else {
+    return next();
+  } else if(!['Stats', 'FAQ', 'Donate'].includes(to.name)) {
+    console.log("2")
+    await changeContract(subdomain)
+    currentContract.currentContract = subdomain
+    return next();
+  } else {
+    console.log("3")
     currentContract.currentContract = subdomain;
     return next();
   }
