@@ -202,11 +202,9 @@ export async function init(contract, refresh = true) {
 	console.time('init')
 	//contract = contracts.compound for example
 	contract = state.contracts.test3
-	console.log('contract: ', contract)
 
 	if(state.initializedContracts && contract.currentContract === state.currentContract && !refresh) return Promise.resolve();
 	if(contract && (contract.currentContract == state.currentContract || state.contracts[contract.currentContract].initializedContracts) && !refresh) return Promise.resolve();
-	console.log('no lol')
 	if(!contract) contract = state
 	try {
         let networkId = await state.web3.eth.net.getId();
@@ -230,7 +228,6 @@ export async function init(contract, refresh = true) {
     ];
 
     contract.swap = new state.web3.eth.Contract(allabis[contract.currentContract].swap_abi, allabis[contract.currentContract].swap_address);
-	console.log('contract.swap', contract.swap)
     contract.swap_token = new state.web3.eth.Contract(ERC20_abi, allabis[contract.currentContract].token_address);
     window[contract.currentContract] = {};
     window[contract.currentContract].swap = contract.swap

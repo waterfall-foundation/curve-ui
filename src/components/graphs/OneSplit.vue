@@ -682,7 +682,6 @@
                                                                 calls[decoded.indexOf(max)][1].slice(10))
                 this.usedFlags = decodedCall[4]
                 this.usedParts = decodedCall[3]
-                console.log(max, "1split swap", this.underlying_coins[this.from_currency], this.underlying_coins[this.to_currency])
 
                 let amount_dy = max[0];
                 let exchangeRate = BN(amount_dy).div(this.precisions(this.to_currency)).div(this.fromInput)
@@ -837,9 +836,7 @@
                 this.swap = []
                 this.addresses = []
                 let abis = Object.keys(contractAbis).filter(p => p != 'susd' && p != 'y')
-              console.log(abis)
                 for(const pool of abis) {
-                  console.log(contractAbis[pool].swap_abi[0])
                   this.swap.push(new contract.web3.eth.Contract(contractAbis[pool].swap_abi, contractAbis[pool].swap_address))
                   this.addresses.push({address: contractAbis[pool].swap_address, pool: pool})
                 }
