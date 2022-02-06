@@ -692,13 +692,12 @@
                 // this.disabled = false
             },
             setExchangeRate(exchangeRate) {
-              console.log(`setting ${exchangeRate} exchange rate`)
-              if(+exchangeRate <= 0.98) this.bgColor = 'red'
-                else this.bgColor= '#505070'
-                if(isNaN(+exchangeRate))
-                  this.exchangeRate = "Not available"
-                else
-                  this.exchangeRate = (+exchangeRate).toFixed(4)
+              this.bgColor= '#505070'
+
+              if(isNaN(+exchangeRate))
+                this.exchangeRate = "Not available"
+              else
+                this.exchangeRate = (+exchangeRate).toFixed(4)
             },
             getPoolsCalls() {
                 let pools = this.pools
