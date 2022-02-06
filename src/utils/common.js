@@ -13,7 +13,9 @@ import { notify, notifyHandler } from '../init'
 var cBN = (val) => new BigNumber(val);
 
 let requiresResetAllowance = [
-  "0xdac17f958d2ee523a2206206994597c13d831ec7",
+    // '0x219ed1326b82c468f825cbD727dbaf66810a619C',
+    // '0x41D062A6AB259E07D96DB88E7BbfC0840f8584c1',
+    // '0xa4cf7cCBfE74165DAba4E0b490Fe716060816d3F',
 
   //Curve LP tokens
   "0x845838df265dcd2c412a1dc9e959c7d08537f8a2",
@@ -303,8 +305,7 @@ export async function multiInitState(calls, contract, initContracts = false) {
     let aggcalls;
     try {
         aggcalls = await multicall.methods.aggregate(calls).call()
-    }
-    catch(err) {
+    } catch(err) {
         console.error(err)
         aggcalls = await multicall.methods.aggregate(calls.slice(1)).call()
         aggcalls[1] = [web3.eth.abi.encodeParameter('uint256', cBN(1e18).toFixed(0)), ...aggcalls[1]] 
@@ -334,12 +335,6 @@ export async function multiInitState(calls, contract, initContracts = false) {
         contract.curveStakedBalance = decoded[0]
         decoded = decoded.slice(1);
     }
-    if(initContracts && ['tbtc', 'ren', 'sbtc'].includes(contract.currentContract)) {
-        contract.initial_A = +decoded[0];
-        contract.initial_A_time = +decoded[1];
-        contract.future_A_time = +decoded[2];
-        decoded = decoded.slice(3)
-    }
     contract.fee = decoded[0] / 1e10;
     contract.admin_fee = decoded[1] / 1e10;
     var token_balance = decoded[2]
@@ -351,15 +346,9 @@ export async function multiInitState(calls, contract, initContracts = false) {
         let contractsDecoded = decoded.slice(-allabis[contract.currentContract].N_COINS*2)
         chunkArr(contractsDecoded, 2).map((v, i) => {
             var addr = v[0];
-            var underlying_addr = v[1];
-            let coin_abi = cERC20_abi
+            let coin_abi = ERC20_abi
             var underlying_addr = v[1];
             let underlying_abi = ERC20_abi
-            if(contract.currentContract == 'susdv2' && i == 3 || contract.currentContract == 'sbtc' && i == 2) {
-                coin_abi = synthERC20_abi
-                underlying_abi = synthERC20_abi
-            }
-            if(['iearn', 'busd', 'susd', 'pax'].includes(contract.currentContract)) coin_abi = yERC20_abi
             contract.coins.push(new web3.eth.Contract(coin_abi, addr));
             contract.underlying_coins.push(new web3.eth.Contract(underlying_abi, underlying_addr));
         })
