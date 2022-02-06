@@ -185,7 +185,7 @@ export default {
     disabled: true,
     disabledButtons: true,
     sync_balances: false,
-    max_balances: true,
+    max_balances: false,
     inf_approval: true,
     wallet_balances: [],
     transferableBalance: null,

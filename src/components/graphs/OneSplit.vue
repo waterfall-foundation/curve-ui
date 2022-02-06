@@ -540,26 +540,28 @@
                 let min_dy = BN(this.toInput).times(this.precisions(j)).times(BN(1 - maxSlippage)).toFixed(0)
                 let pool = contract.currentContract
                 let bestContract = contract;
-                if(this.bestPool >= 0 && this.bestPool < 7) {
-                    pool = Object.keys(contract.contracts)[this.bestPool]
-                    bestContract = contract.contracts[pool]
-                }
+                // if(this.bestPool > 0 && this.bestPool < 7) {
+                //     pool = Object.keys(contract.contracts)[this.bestPool]
+                //     bestContract = contract.contracts[pool]
+                // }
                 let address = bestContract.swap._address
                 this.waitingMessage = `Please approve ${this.fromInput} ${this.getCurrency(this.from_currency)} for exchange`
-                var { dismiss } = notifyNotification(this.waitingMessage)
+                let dismiss = notifyNotification(this.waitingMessage)
                 try {
                     if (this.inf_approval)
-                            await common.ensure_underlying_allowance(this.from_currency, contract.max_allowance, this.coins, address, this.swapwrapped, bestContract)
-                        else
-                            await common.ensure_underlying_allowance(this.from_currency, amount, this.coins, address, this.swapwrapped, bestContract);
-                dismiss()
+                        await common.ensure_underlying_allowance(this.from_currency, contract.max_allowance, this.coins, address, this.swapwrapped, bestContract)
+                    else
+                        await common.ensure_underlying_allowance(this.from_currency, amount, this.coins, address, this.swapwrapped, bestContract);
+                    dismiss()
+                  console.log('dismissed')
                 } catch(err) {
+                  console.log('errored')
                     this.handleError(err)
                 }
                 this.waitingMessage = `Please confirm swap 
                                         from ${this.fromInput} ${this.getCurrency(this.from_currency)}
                                         for min ${this.toFixed(min_dy / this.precisions(j))} ${this.getCurrency(this.to_currency)}`
-                var { dismiss } = notifyNotification(this.waitingMessage)
+                dismiss = notifyNotification(this.waitingMessage)
 
                 let exchangeMethod = bestContract.swap.methods.exchange
                 i = this.normalizeCurrency(i)
@@ -701,7 +703,9 @@
             },
             getPoolsCalls() {
                 let pools = this.pools
+                console.log(pools)
                 let calls = []
+                this.swap.push(new contract.web3.eth.Contract(contractAbis[pool].swap_abi, contractAbis[pool].swap_address))
                 if(!this.swapwrapped) {          
                     let dx = BN(this.fromInput).times(contractAbis.test3.coin_precisions[this.from_currency])
                     if(this.pools.includes('test3')) {
@@ -783,24 +787,17 @@
                         if(result[1]) {
                             [pool1, exchangeRate1, dy_1split] = result[1]
                         }
-                        let [txPricePool, txPrice1split] = this.calculateGas(pool)
-                        let useOneSplit = ((this.fromInput * exchangeRate1) - (this.fromInput * exchangeRate)) > (txPrice1split - txPricePool)
-                        this.estimateGas = txPricePool
-                        if(exchangeRate < exchangeRate1 && useOneSplit) {
-                            exchangeRate = exchangeRate1
-                            pool = '1split'
-                            this.estimateGas = txPrice1split
-                        }
-                        else this.distribution = null
-                        this.bestPool = pools.indexOf(pool)
+                        let [txPricePool] = this.calculateGas(pool)
+                        this.estimateGas = txPricePool;
+                        this.bestPool = 0
                     }
                     let bestPool = this.bestPool
                     if(bestPool > 0) bestPool +=1
                     let address = this.swap[bestPool]._address
-                    if (BN(await this.getCoins(this.from_currency).methods.allowance(contract.default_account || '0x0000000000000000000000000000000000000000', address).call()).gt(contract.max_allowance.div(BN(2))))
-                        this.inf_approval = true;
-                    else
-                        this.inf_approval = false;
+                    // if (BN(await this.getCoins(this.from_currency).methods.allowance(contract.default_account || '0x0000000000000000000000000000000000000000', address).call()).gt(contract.max_allowance.div(BN(2))))
+                    //     this.inf_approval = true;
+                    // else
+                    //     this.inf_approval = false;
 
                     //show converted exchange rate when swapping wrapped coins?
                     this.toInput = this.toFixed(BN(this.fromInput).times(BN(exchangeRate)));
@@ -836,13 +833,15 @@
                 this.addresses = []
                 let abis = Object.keys(contractAbis).filter(p => p != 'susd' && p != 'y')
                 for(const pool of abis) {
+                  console.log('pushing', pool)
                   this.swap.push(new contract.web3.eth.Contract(contractAbis[pool].swap_abi, contractAbis[pool].swap_address))
+                  console.log(this.swap)
                   this.addresses.push({address: contractAbis[pool].swap_address, pool: pool})
                 }
 
-                this.coins.push(new contract.web3.eth.Contract(cERC20_abi, contractAbis.test3.coins[0]))
-                this.coins.push(new contract.web3.eth.Contract(cERC20_abi, contractAbis.test3.coins[1]))
-                this.coins.push(new contract.web3.eth.Contract(cERC20_abi, contractAbis.test3.coins[2]))
+                this.coins.push(new contract.web3.eth.Contract(ERC20_abi, contractAbis.test3.coins[0]))
+                this.coins.push(new contract.web3.eth.Contract(ERC20_abi, contractAbis.test3.coins[1]))
+                this.coins.push(new contract.web3.eth.Contract(ERC20_abi, contractAbis.test3.coins[2]))
 
 
                 this.snxExchanger = new contract.web3.eth.Contract(synthetixExchanger_ABI, synthetixExchanger_address)

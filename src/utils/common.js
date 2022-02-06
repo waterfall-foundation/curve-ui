@@ -13,7 +13,9 @@ import { notify, notifyHandler } from '../init'
 var cBN = (val) => new BigNumber(val);
 
 let requiresResetAllowance = [
-  "0xdac17f958d2ee523a2206206994597c13d831ec7",
+    // '0x219ed1326b82c468f825cbD727dbaf66810a619C',
+    // '0x41D062A6AB259E07D96DB88E7BbfC0840f8584c1',
+    // '0xa4cf7cCBfE74165DAba4E0b490Fe716060816d3F',
 
   //Curve LP tokens
   "0x845838df265dcd2c412a1dc9e959c7d08537f8a2",
