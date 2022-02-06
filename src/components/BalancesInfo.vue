@@ -248,7 +248,7 @@
       },
     },
     async created() {
-      let key = this.currentPool == 'iearn' ? 'y' : this.currentPool == 'susdv2' ? 'susd' : this.currentPool
+      let key = this.currentPool
       let volume = volumeStore.state.volumes[key][0] || 0
       if(this.isBTC) {
         this.btcPrice = await priceStore.getBTCPrice()

@@ -201,7 +201,6 @@ export async function init(contract, refresh = true) {
 	state.multicall = state.multicall || new web3.eth.Contract(multicall_abi, multicall_address)
 	console.time('init')
 	//contract = contracts.compound for example
-	contract = state.contracts.test3
 
 	if(state.initializedContracts && contract.currentContract === state.currentContract && !refresh) return Promise.resolve();
 	if(contract && (contract.currentContract == state.currentContract || state.contracts[contract.currentContract].initializedContracts) && !refresh) return Promise.resolve();
@@ -242,14 +241,12 @@ export async function init(contract, refresh = true) {
       calls.push(...(await common.update_fee_info('new', contract, false)));
     for (let i = 0; i < allabis[contract.currentContract].N_COINS; i++) {
 	  	let coinsCall = contract.swap.methods.coins(i).encodeABI()
-	  	let underlyingCoinsCall = ['tbtc', 'ren', 'sbtc'].includes(contract.currentContract) ?
-	  								contract.swap.methods.coins(i).encodeABI()
-	  								: contract.swap.methods.underlying_coins(i).encodeABI();
+	  	let underlyingCoinsCall = contract.swap.methods.coins(i).encodeABI();
     	calls.push([contract.swap._address, coinsCall])
     	calls.push([contract.swap._address, underlyingCoinsCall])
     }
     await common.multiInitState(calls, contract, true)
-  	contract.initializedContracts = true;
+	contract.initializedContracts = true;
   	console.timeEnd('init')
   	state.allInitContracts = new Set(state.allInitContracts.add(contract.currentContract))
   	console.log([...state.allInitContracts])

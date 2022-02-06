@@ -2,15 +2,7 @@ import Vue from 'vue'
 import abis from '../../allabis'
 
 	let initState = () => ({
-		compound: [],
-		usdt: [],
-		y: [],
-		busd: [],
-		susd: [],
-		pax: [],
-		tbtc: [],
-		ren: [],
-		sbtc: [],
+		test3: [],
 	})
 
 export const state = Vue.observable({
@@ -42,7 +34,6 @@ export function findClosestPrice(timestamp, data) {
 
 export async function fetchVolumeData(pools, refresh = false, period = 5) {
 	if(!Array.isArray(pools)) pools = [pools]
-	pools = pools.map(p => p == 'iearn' ? 'y' : p == 'susdv2' ? 'susd' : p == 'ren2' ? 'ren' : p == 'rens' ? 'sbtc' : p)
 	if(!refresh) pools = pools.filter(pool => !state.volumeData[period][pool].length)
 	//pools = pools.filter(pool => !['tbtc'].includes(pool))
 	let requests = pools.map(p => {

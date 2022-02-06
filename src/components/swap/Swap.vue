@@ -6,13 +6,7 @@
                     <fieldset class='item'>
                         <legend>From:</legend>
                         <div class='maxbalance' @click='set_max_balance'>
-                            Max: 
-                            <span 
-                                v-show="(currentPool == 'susdv2' && from_currency == 3 || currentPool == 'sbtc' && from_currency == 2)
-                                         && maxBalanceText != '0.00'"
-                            >
-                                {{maxSynthText}}/
-                            </span>
+                            Max:
                             <span>{{maxBalanceText}}</span>
                             <span v-show='susdWaitingPeriod' class='susd-waiting-period'>
                                 <span class='tooltip'>
@@ -129,9 +123,6 @@
                         <label for='swapw' v-show = "!['susdv2', 'tbtc', 'ren', 'sbtc'].includes(currentPool)">Swap wrapped</label>
                     </li>
                 </ul>
-                <p class='simple-error' v-show='exchangeRate<=0.98'>
-                    Warning! Exchange rate is too low!
-                </p>
                 <p class='trade-buttons' v-show="['ren', 'sbtc'].includes(currentPool)">
                     <a href='https://bridge.renproject.io/'>Mint/redeem renBTC</a>
                 </p>
@@ -166,7 +157,6 @@
     import { getters, contract as currentContract, gas as contractGas} from '../../contract'
     import * as helpers from '../../utils/helpers'
     import allabis from '../../allabis'
-    import * as priceStore from '../common/priceStore'
 
     import * as gasPriceStore from '../common/gasPriceStore'
     import GasPrice from '../common/GasPrice.vue'
@@ -244,7 +234,6 @@
             },
             maxBalance(val) {
                 let amount = val / this.precisions[this.from_currency]
-
                 this.maxBalanceText = currentContract.default_account ? this.toFixed(amount) : 0;
             },
             maxSynthBalance(val) {
@@ -315,8 +304,6 @@
         methods: { 
             async mounted() {
                 console.log(currentContract.default_account)
-                if(['ren', 'sbtc'].includes(currentContract.currentContract)) this.btcPrice = await priceStore.getBTCPrice()
-                if(['tbtc', 'ren', 'sbtc'].includes(currentContract.currentContract)) this.fromInput = '0.0001'
                 this.c_rates = currentContract.c_rates
                 this.coins = currentContract.underlying_coins
                 if(this.swapwrapped) {
@@ -369,8 +356,7 @@
                         let cdx_ = (dx_ * this.c_rates[this.from_currency] * allabis[currentContract.currentContract].wrapped_precisions[this.from_currency])
                         this.exchangeRate = (cdy_ / cdx_).toFixed(4)
                     }
-                    if(this.exchangeRate <= 0.98) this.bgColor = 'red'
-                    else this.bgColor= '#505070'
+                    this.bgColor= '#505070'
                     if(isNaN(this.exchangeRate)) this.exchangeRate = "Not available"
                     let amount = Math.floor(
                             100 * parseFloat(balance) / this.precisions[this.to_currency]
@@ -388,6 +374,7 @@
                 this.promise = helpers.makeCancelable(promise)
             },
             async from_cur_handler() {
+                console.log('coins: ', this.coins)
                 let currentAllowance = cBN(await this.coins[this.from_currency].methods.allowance(currentContract.default_account, currentContract.swap_address).call())
                 let maxAllowance = currentContract.max_allowance.div(cBN(2))
                 if (currentAllowance.gt(maxAllowance))
@@ -472,12 +459,7 @@
                     let calls = [
                         [currentContract.swap._address, currentContract.swap.methods.balances(i).encodeABI()],
                     ]
-                    if(!this.swapwrapped && !['susdv2', 'tbtc', 'ren'].includes(this.currentPool))
-                        calls.push([currentContract.swap._address, currentContract.swap.methods.get_dy_underlying(i, j, dx).encodeABI()])
-                    else {
-                        //dx = cBN(dx).times(currentContract.c_rates[i])
-                        calls.push([currentContract.swap._address, currentContract.swap.methods.get_dy(i, j, dx).encodeABI()])
-                    }
+                    calls.push([currentContract.swap._address, currentContract.swap.methods.get_dy(i, j, dx).encodeABI()])
                     calls.push([this.coins[this.to_currency]._address , this.coins[this.to_currency].methods.balanceOf(currentContract.default_account).encodeABI()])
                     let aggcalls = await currentContract.multicall.methods.aggregate(calls).call()
                     let decoded = aggcalls[1].map(hex => currentContract.web3.eth.abi.decodeParameter('uint256', hex))
@@ -511,16 +493,9 @@
                 if(BN(this.maxBalance).gt(0) && BN(this.maxBalance).div(this.precisions[i]).minus(BN(this.fromInput)).lt(BN(this.minAmount))) {
                     dx = this.maxBalance
                 }
-                if(
-                    (this.currentPool == 'susdv2' && this.from_currency == 3 ||
-                        this.currentPool == 'sbtc' && this.from_currency == 2) &&
-                    BN(this.maxSynthBalance).gt(0) && 
-                    BN(this.maxSynthBalance).minus(BN(this.fromInput)).lt(BN(this.minAmount))
-                ) {
-                    dx = BN(this.maxSynthBalance).times(1e18).toFixed(0,1)
-                }
+
                 let min_dy_method = 'get_dy_underlying'
-                if(this.swapwrapped || ['susdv2', 'tbtc', 'ren', 'sbtc'].includes(this.currentPool)) {
+                if(this.swapwrapped || ['test3'].includes(this.currentPool)) {
                     min_dy_method = 'get_dy'
                 }
                 var min_dy = BN(await currentContract.swap.methods[min_dy_method](i, j, BN(dx).toFixed(0,1)).call())
@@ -548,7 +523,7 @@
                 var { dismiss } = notifyNotification(this.waitingMessage)
                 min_dy = cBN(min_dy).toFixed(0);
                 let exchangeMethod = currentContract.swap.methods.exchange_underlying
-                if(this.swapwrapped || ['susdv2', 'tbtc', 'ren', 'sbtc'].includes(this.currentPool)) exchangeMethod = currentContract.swap.methods.exchange
+                if(this.swapwrapped || ['test3'].includes(this.currentPool)) exchangeMethod = currentContract.swap.methods.exchange
                 try {
                     await helpers.setTimeoutPromise(100)
                     await exchangeMethod(i, j, dx, BN(min_dy).toFixed(0,1))

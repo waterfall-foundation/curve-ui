@@ -463,17 +463,14 @@ router.beforeEach(async (to, from, next) => {
   currentContract.swapbtc = false
 
   if((currentContract.currentContract != subdomain && !['Stats', 'FAQ', 'Donate'].includes(to.name)) || ['Stats', 'FAQ', 'Donate'].includes(from.name)) {
-    console.log("1")
     await changeContract(subdomain)
     currentContract.currentContract = subdomain
     return next();
   } else if(!['Stats', 'FAQ', 'Donate'].includes(to.name)) {
-    console.log("2")
     await changeContract(subdomain)
     currentContract.currentContract = subdomain
     return next();
   } else {
-    console.log("3")
     currentContract.currentContract = subdomain;
     return next();
   }
