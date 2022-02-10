@@ -84,6 +84,7 @@ export async function ensure_allowance_zap_out(amount, fromContract, toContract)
 
 export async function ensure_allowance(amounts, plain = false, contractName, N_COINS, infinite = false) {
     var default_account = currentContract.default_account
+    console.log('lol', currentContract)
     let cont = currentContract
     if(N_COINS === undefined) {
         N_COINS = currentContract.N_COINS
@@ -94,9 +95,9 @@ export async function ensure_allowance(amounts, plain = false, contractName, N_C
     var allowances = new Array(N_COINS);
     let coins = currentContract.coins;
     let swap = cont.swap_address;
+    console.log('swap', swap)
     if(plain) {
         coins = cont.underlying_coins;
-        swap = allabis[cont.currentContract].deposit_address;
     }
     let fromContract = coins
     let calls = []

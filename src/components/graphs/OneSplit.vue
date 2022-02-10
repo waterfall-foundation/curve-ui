@@ -257,8 +257,8 @@
                 if(this.swapwrapped === false) {
                     return {
                         wwat: 'wWAT',
-                        alex: 'Alex',
                         serg: 'Serg',
+                        alex: 'Alex',
                     }
                 }
                 return {
@@ -288,7 +288,7 @@
             },
             bestPoolText() {
                 // if((this.from_currency == 6 && [3,4,5].includes(this.to_currency)) 
-                //     || (this.to_currency == 6 && [3,4,5].includes(this.from_currency))) return 'Not Available'
+                //     || (this.to_currency == 6 && [3,4,5].includes(this.from_currency))) return 'Not Available'\
                 if(this.bestPool === null) return 'Not available'
                 return ['test3',][this.bestPool]
             },
@@ -531,7 +531,7 @@
                 if(this.loadingAction) return;
                 this.setLoadingAction();
                 this.show_loading = true;
-                //handle allowances
+                 //handle allowances
                 var i = this.from_currency
                 var j = this.to_currency;
                 let amount = BN(this.fromInput).times(this.precisions(i)).toFixed(0)
@@ -553,9 +553,7 @@
                     else
                         await common.ensure_underlying_allowance(this.from_currency, amount, this.coins, address, this.swapwrapped, bestContract);
                     dismiss()
-                  console.log('dismissed')
                 } catch(err) {
-                  console.log('errored')
                     this.handleError(err)
                 }
                 this.waitingMessage = `Please confirm swap 
@@ -695,7 +693,6 @@
             },
             setExchangeRate(exchangeRate) {
               this.bgColor= '#505070'
-
               if(isNaN(+exchangeRate))
                 this.exchangeRate = "Not available"
               else
@@ -703,7 +700,7 @@
             },
             getPoolsCalls() {
                 let pools = this.pools
-                console.log(pools)
+                console.log('pools', pools)
                 let calls = []
                 this.swap.push(new contract.web3.eth.Contract(contractAbis[pool].swap_abi, contractAbis[pool].swap_address))
                 if(!this.swapwrapped) {          
