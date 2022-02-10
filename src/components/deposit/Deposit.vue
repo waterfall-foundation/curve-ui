@@ -581,7 +581,7 @@ export default {
             currentContract.virtual_price, 'virtual_price', token_amount, 'token_amount', Date.now())
         this.waitingMessage = 'Please confirm deposit transaction'
         await helpers.setTimeoutPromise(100)
-        let add_liquidity = currentContract.deposit_zap.methods.add_liquidity(amounts, token_amount).send({
+        let add_liquidity = currentContract.swap.methods.add_liquidity(amounts, token_amount).send({
           from: currentContract.default_account,
           gasPrice: this.gasPriceWei,
           gas: gas,
