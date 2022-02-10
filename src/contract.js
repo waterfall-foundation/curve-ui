@@ -17,21 +17,20 @@ export const LENDING_PRECISION = 1e18;
 export const PRECISION = 1e18;
 
 var migration_address = '0x54Ee22d5593FC76fB20EafAb66C45aAb3268B800';
-export const infura_url = '';
+export const infura_url = 'https://rpc.waterfall.network/rpc';
 
 const currencies = {
 	test3: {
 		wwat: 'wWAT',
-		alex: 'Alex',
 		serg: 'Serg',
-	},
+		alex: 'Alex',
+	}
 }
 
 export const allCurrencies = currencies
 
 export const poolMenu = {
 	test3: 'Test3',
-	usdt: 'USDT',
 }
 
 export const gas = {
@@ -92,7 +91,7 @@ const state = Vue.observable({
 	swapbtc: false,
 	adapterContract: null,
 	currentContract: 'test3',
-	currencies: currencies.compound,
+	currencies: currencies.test3,
 	N_COINS: N_COINS,
 	coin_precisions: coin_precisions,
 	wrapped_precisions: [],

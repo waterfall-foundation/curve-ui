@@ -43,8 +43,8 @@
                                     <img 
                                         :class="{'token-icon': true, [currency+'-icon']: true, 'y': swapwrapped}" 
                                         :src='getTokenIcon(currency)'>
-                                    <span v-show="!swapwrapped && !['tbtc', 'ren', 'sbtc'].includes(currentPool)">{{currency | capitalize}}</span>
-                                    <span v-show="swapwrapped || ['tbtc', 'ren', 'sbtc'].includes(currentPool)">{{currencies[currency]}}</span>
+                                    <span v-show="!swapwrapped">{{currency | capitalize}}</span>
+                                    <span v-show="swapwrapped || [].includes(currentPool)">{{currencies[currency]}}</span>
                                 </label>
                             </li>
                         </ul>
@@ -157,7 +157,6 @@
     import { getters, contract as currentContract, gas as contractGas} from '../../contract'
     import * as helpers from '../../utils/helpers'
     import allabis from '../../allabis'
-
     import * as gasPriceStore from '../common/gasPriceStore'
     import GasPrice from '../common/GasPrice.vue'
 
@@ -303,9 +302,10 @@
         },
         methods: { 
             async mounted() {
-                console.log(currentContract.default_account)
+                console.log('mounted', currentContract.default_account)
                 this.c_rates = currentContract.c_rates
-                this.coins = currentContract.underlying_coins
+                this.coins = currentContract.coins
+
                 if(this.swapwrapped) {
                     this.coins = currentContract.coins
                 }

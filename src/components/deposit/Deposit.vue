@@ -11,8 +11,8 @@
                                     :class="{'token-icon': true, [currency+'-icon']: true, 'y': depositc && !isPlain}"
                                     :src='getTokenIcon(currency)'>
                                 <span v-show='depositc'>{{ currencies[currency] }}
-    	                        	<span v-show="!(currency == 'usdt' && currentPool == 'usdt' || currency == 'pax') 
-    	                        					&& !['susdv2', 'tbtc', 'ren', 'sbtc'].includes(currentPool)"> 
+    	                        	<span v-show="!(currency == 'alex' || currency == 'serg')
+    	                        					&& ![].includes(currentPool)">
     	                        		(in {{ currency | capitalize }})
     	                        	</span>
     	                        </span>
@@ -77,8 +77,8 @@
                     	</span>
           </label>
         </li>
-        <li v-show="!['susd','susdv2','tbtc','ren','sbtc'].includes(currentPool)">
-          <input id="depositc" type="checkbox" name="inf-approval" checked v-model='depositc'>
+        <li v-show="![].includes(currentPool)">
+          <input id="depositc" type="checkbox" name="deposit-wrapped" checked v-model='depositc'>
           <label for="depositc">Deposit wrapped</label>
         </li>
       </ul>
@@ -260,7 +260,7 @@ export default {
       return this.inputs.filter(v => +v == 0).length == this.N_COINS && !this.disabledButtons
     },
     isPlain() {
-      return ['susdv2', 'tbtc', 'ren', 'sbtc'].includes(this.currentPool)
+      return ['test3'].includes(this.currentPool)
     },
     transferableBalanceText() {
       return this.toFixed((this.transferableBalance / 1e18))
@@ -320,7 +320,7 @@ export default {
 
     async mounted(oldContract) {
 
-      if (['susd', 'susdv2', 'tbtc', 'ren', 'sbtc'].includes(currentContract.currentContract)) this.depositc = true;
+      if ([].includes(currentContract.currentContract)) this.depositc = true;
       this.changeSwapInfo(this.depositc)
       currentContract.showSlippage = false;
       currentContract.slippage = 0;
@@ -345,7 +345,6 @@ export default {
       return isNaN(rounded) ? '0.00' : rounded
     },
     maxBalanceCoin(i) {
-      console.log('lol', i, this.wallet_balances)
       return this.toFixed(this.wallet_balances[i] * this.rates[i])
     },
     setMaxBalanceCoin(i) {
@@ -362,17 +361,18 @@ export default {
       return '0.00'
     },
     changeSwapInfo(val) {
-      if (val) {
-        this.coins = currentContract.coins
-        if (this.currentPool == 'susdv2') Vue.set(this.coins, 3, currentContract.underlying_coins[3])
-        if (this.currentPool == 'sbtc') Vue.set(this.coins, 2, currentContract.underlying_coins[2])
-        this.rates = currentContract.c_rates
-        this.swap_address = currentContract.swap_address
-      } else {
-        this.coins = currentContract.underlying_coins
-        this.rates = currentContract.coin_precisions.map(cp => 1 / cp)
-        this.swap_address = currentContract.deposit_zap._address
-      }
+      this.coins = currentContract.coins
+      this.rates = currentContract.c_rates
+      this.swap_address = currentContract.swap_address
+      // if (val) {
+      //   this.coins = currentContract.coins
+      //   this.rates = currentContract.c_rates
+      //   this.swap_address = currentContract.swap_address
+      // } else {
+      //   this.coins = currentContract.underlying_coins
+      //   this.rates = currentContract.coin_precisions.map(cp => 1 / cp)
+      //   this.swap_address = currentContract.deposit_zap._address
+      // }
     },
     setInputStyles(newInputs = false, newContract, oldContract) {
       if (oldContract) {
@@ -478,18 +478,7 @@ export default {
       )
       let endOffset = 1
       calls.push([currentContract.swap_token._address, currentContract.swap_token.methods.totalSupply().encodeABI()])
-      if (['susdv2', 'sbtc'].includes(this.currentPool)) {
-        let currencyKey = '0x7355534400000000000000000000000000000000000000000000000000000000'
-        if (this.currentPool == 'sbtc')
-          currencyKey = '0x7342544300000000000000000000000000000000000000000000000000000000'
-        calls.push([
-          currentContract.snxExchanger._address,
-          currentContract.snxExchanger.methods
-              .maxSecsLeftInWaitingPeriod(currentContract.default_account, currencyKey)
-              .encodeABI()
-        ])
-        endOffset = 2
-      }
+
       let aggcalls = await currentContract.multicall.methods.aggregate(calls).call()
       let decoded = aggcalls[1].map(hex => currentContract.web3.eth.abi.decodeParameter('uint256', hex))
       decoded.slice(0, decoded.length - endOffset).forEach((balance, i) => {
@@ -511,6 +500,7 @@ export default {
           Vue.set(this.amounts, i, BN(this.inputs[i]).div(currentContract.c_rates[i]).toFixed(0, 1))
         }
       })
+      console.log('this.transferableBalance', this.transferableBalance)
       this.amounts = this.amounts.map(v => v || 0)
       let total_supply = +decoded[decoded.length - 1];
       this.waitingMessage = 'Please approve spending your coins'
@@ -537,13 +527,22 @@ export default {
         this.estimateGas = contractGas.deposit[this.currentPool] / 2
       else
         this.estimateGas = (contractGas.depositzap[this.currentPool].deposit(nonZeroInputs) | 0) / 1.5
-      if (this.inf_approval)
-        await common.ensure_allowance(this.amounts, !this.depositc, undefined, undefined, true)
-      else if (this.depositc) {
-        await common.ensure_allowance(this.amounts, false);
-      } else {
-        await common.ensure_allowance(amounts, true)
+
+      try {
+        await common.ensure_allowance(this.amounts, !this.depositc, undefined, undefined, this.inf_approval)
+      } catch (e) {
+        console.log('lol', e.message)
       }
+      // if (this.inf_approval) {
+      //   console.log('lol1')
+      //   await common.ensure_allowance(this.amounts, !this.depositc, undefined, undefined, true)
+      // } else if (this.depositc) {
+      //   console.log('lol2')
+      //   await common.ensure_allowance(this.amounts, false);
+      // } else {
+      //   console.log('lol3')
+      //   await common.ensure_allowance(amounts, true)
+      // }
       let receipt;
       let minted = 0;
       if (this.depositc) {

@@ -1848,8 +1848,8 @@ export let test3 = {
  is_plain: [true, true, true],
  coins: [
   '0x219ed1326b82c468f825cbD727dbaf66810a619C',
-  '0x41D062A6AB259E07D96DB88E7BbfC0840f8584c1',
-  '0xa4cf7cCBfE74165DAba4E0b490Fe716060816d3F'
+  '0xa4cf7cCBfE74165DAba4E0b490Fe716060816d3F',
+  '0x41D062A6AB259E07D96DB88E7BbfC0840f8584c1'
  ],
  // underlying_coins: [
  //  '0x219ed1326b82c468f825cbD727dbaf66810a619C',
