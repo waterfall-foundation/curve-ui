@@ -132,8 +132,7 @@ async function init(name, init = true) {
     if(init) await state.init(name);
     state.contract.initializedContracts = true;
     console.timeEnd('initswap')
-  }
-  catch(err) {
+  } catch(err) {
     console.error(err)
   }
 

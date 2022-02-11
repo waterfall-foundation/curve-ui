@@ -19,43 +19,40 @@
       <router-link :to="'/'+currentPool" v-show="currentPool !='susd'">Buy and sell</router-link>
       <router-link :to="'/' + currentPool + '/deposit'" v-show="currentPool !='susd'">Deposit</router-link>
       <router-link :to="'/' + currentPool + '/withdraw'">Withdraw</router-link>
-      <router-link :to="'/' + currentPool + '/withdraw_old'" v-show="currentPool == 'compound' && oldBalance > 0">Withdraw old</router-link>
-      <router-link to="/susd/withdraw" v-show="currentPool == 'susdv2' && oldBalance > 0">Withdraw old</router-link>
-      <router-link :to="'/' + currentPool + '/stats'" v-show="currentPool !='susd'">Stats</router-link>
-      <router-link :to="'/' + currentPool + '/profit'" v-show="currentPool !='susd'">Profit</router-link>
-      <router-link :to="'/curvepay/' + currentPool">Pay</router-link>
-      <div class='poolsdropdown right'>
-        <span>?</span>
-        <div class='dropdown'>
-          <a :href="'https://explorer.waterfall.network/address/' + this.poolAddress" rel='noopener noreferrer'>Pool contract</a>
-          <a :href="'https://explorer.waterfall.network/address/' + this.tokenAddress" rel='noopener noreferrer'>Token contract</a>
-          <p>____________</p>
-          <router-link to="/audits">Audits</router-link>
-          <router-link to="/events">Events</router-link>
-          <router-link :to="'/' + currentPool + '/risks'">Risks</router-link>
-          <router-link to="/bugbounty">Bug Bounty</router-link>
-          <router-link :to="'/' + currentPool + '/faq'">FAQ</router-link>
-          <router-link to="/integrations">Integrations</router-link>
-          <router-link :to="'/' + currentPool + '/donate'">Donate</router-link>
-          <a href='https://guides.curve.fi' rel='noopener noreferrer'>Guides</a>
-          <p>____________</p>
-          <a :href="'https://github.com/curvefi/curve-contract/tree/pool_'+gitBranches[currentPool]" rel='noopener noreferrer'>git@</a>
-          <a href="https://github.com/pengiundev/curve-vue" rel='noopener noreferrer'>git@UI</a>
-        </div>
-      </div>
-      <router-link to="/audits" class='showmobile'>Audits</router-link>
-      <router-link to="/events" class='showmobile'>Events</router-link>
-      <router-link :to="'/' + currentPool + '/faq'" class='showmobile'>FAQ</router-link>
-      <router-link to="/integrations" class='showmobile'>Integrations</router-link>
-      <router-link to="/bugbounty" class='showmobile'>Bug Bounty</router-link>
-      <router-link :to="'/' + currentPool + '/donate'" class='showmobile'>Donate</router-link>
-      <a href='https://guides.curve.fi' rel='noopener noreferrer' class='showmobile'>Guides</a>
-      <a :href="'https://github.com/curvefi/curve-contract/tree/pool_'+gitBranches[currentPool]" class='showmobile' rel='noopener noreferrer'>git@</a>
-      <a href="https://github.com/pengiundev/curve-vue" class='showmobile' rel='noopener noreferrer'>git@UI</a>
+<!--      <router-link :to="'/' + currentPool + '/withdraw_old'" v-show="currentPool == 'compound' && oldBalance > 0">Withdraw old</router-link>-->
+<!--      <router-link to="/susd/withdraw" v-show="currentPool == 'susdv2' && oldBalance > 0">Withdraw old</router-link>-->
+<!--      <router-link :to="'/' + currentPool + '/stats'" v-show="currentPool !='susd'">Stats</router-link>-->
+<!--      <router-link :to="'/' + currentPool + '/profit'" v-show="currentPool !='susd'">Profit</router-link>-->
+<!--      <router-link :to="'/curvepay/' + currentPool">Pay</router-link>-->
+<!--      <div class='poolsdropdown right'>-->
+<!--        <span>?</span>-->
+<!--        <div class='dropdown'>-->
+<!--          <a :href="'https://explorer.waterfall.network/address/' + this.poolAddress" rel='noopener noreferrer'>Pool contract</a>-->
+<!--          <a :href="'https://explorer.waterfall.network/address/' + this.tokenAddress" rel='noopener noreferrer'>Token contract</a>-->
+<!--          <p>____________</p>-->
+<!--          <router-link to="/audits">Audits</router-link>-->
+<!--          <router-link to="/events">Events</router-link>-->
+<!--          <router-link :to="'/' + currentPool + '/risks'">Risks</router-link>-->
+<!--          <router-link to="/bugbounty">Bug Bounty</router-link>-->
+<!--          <router-link :to="'/' + currentPool + '/faq'">FAQ</router-link>-->
+<!--          <router-link to="/integrations">Integrations</router-link>-->
+<!--          <router-link :to="'/' + currentPool + '/donate'">Donate</router-link>-->
+<!--          <a href='https://guides.curve.fi' rel='noopener noreferrer'>Guides</a>-->
+<!--          <p>____________</p>-->
+<!--          <a :href="'https://github.com/curvefi/curve-contract/tree/pool_'+gitBranches[currentPool]" rel='noopener noreferrer'>git@</a>-->
+<!--          <a href="https://github.com/pengiundev/curve-vue" rel='noopener noreferrer'>git@UI</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <router-link to="/audits" class='showmobile'>Audits</router-link>-->
+<!--      <router-link to="/events" class='showmobile'>Events</router-link>-->
+<!--      <router-link :to="'/' + currentPool + '/faq'" class='showmobile'>FAQ</router-link>-->
+<!--      <router-link to="/integrations" class='showmobile'>Integrations</router-link>-->
+<!--      <router-link to="/bugbounty" class='showmobile'>Bug Bounty</router-link>-->
+<!--      <router-link :to="'/' + currentPool + '/donate'" class='showmobile'>Donate</router-link>-->
+<!--      <a href='https://guides.curve.fi' rel='noopener noreferrer' class='showmobile'>Guides</a>-->
+<!--      <a :href="'https://github.com/curvefi/curve-contract/tree/pool_'+gitBranches[currentPool]" class='showmobile' rel='noopener noreferrer'>git@</a>-->
+<!--      <a href="https://github.com/pengiundev/curve-vue" class='showmobile' rel='noopener noreferrer'>git@UI</a>-->
       <button class='simplebutton showmobile' @click = 'changeWallets'>Change wallet</button>
-      <button id='changeAccounts' class='simplebutton showmobile' 
-        v-show="['ledger', 'trezor'].includes(walletName)" 
-        @click = 'changeAccounts'>Change accounts</button>
     </div>
     <div id="screen">
         <div :class="{'blue window': true, [$route.name]: true}">
@@ -82,6 +79,8 @@
     :currencies = 'currencies'
     v-if="!['Stats', 'FAQ', 'Donate', 'Root', 'CombinedStats'].includes($route.name)"/>
 
+    <TotalBalances></TotalBalances>
+
     <footer>
       <a href="https://explorer.waterfall.network">Waterfall network explorer</a>
     </footer>
@@ -93,6 +92,7 @@
   import { getters, contract as currentContract, changeContract, poolMenu } from '../contract'
   import init, { onboard } from '../init'
   import allabis from '../allabis'
+  import TotalBalances from "./root/TotalBalances";
 
   export default {
     data: () => ({
@@ -111,6 +111,7 @@
       }
     }),
     components: {
+      TotalBalances,
       BalancesInfo,
     },
     computed: {

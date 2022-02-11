@@ -31,15 +31,10 @@ export function totalCurrencies(currencies) {
 }
 
 export function getTokenIcon(token, wrapped, pool) {
-    if(wrapped && ['compound', 'usdt'].includes(pool) && token != 'pax') {
-        token = 'c' + token
-    }
-    else if(wrapped && ['iearn', 'y', 'busd', 'pax'].includes(pool) && token != 'pax') {
-        token = '_y' + token
-    }
     let publicPath = process.env.BASE_URL
     let asset
-    let pngs = ['dai', 'busd', 'pax', '_ydai', '_yusdc', '_yusdt', '_ytusd', '_ybusd']
+    let pngs = ['wwat', 'alex', 'serg']
+    console.log('publicPath', publicPath)
     if(pngs.includes(token)) {
         asset = publicPath + 'tokens/' + token + '.png'
     }
