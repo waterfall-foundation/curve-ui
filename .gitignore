@@ -1,0 +1,30 @@
+node_modules
+dist
+secrets.*.js
+
+# dependencies
+/node_modules
+package-lock.json
+
+# production
+/build
+/server-build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+/.eslintcache
+/.idea
+
+certificate.key
+certificate.crt
+
+/public/env-config.js

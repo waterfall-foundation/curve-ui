@@ -87,7 +87,6 @@ export function makeCancelable(promise) {
             .then(resolve)
             .catch(reject);
     });
-
     wrappedPromise.cancel = (reason) => {
         rejectFn({ canceled: true, reason: reason });
     };

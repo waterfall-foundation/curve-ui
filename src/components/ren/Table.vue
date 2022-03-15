@@ -160,7 +160,7 @@
 							<span v-show='transaction.type == 1 && transaction.state > 60'> {{ transaction.confirmations }}  </span>
 						</a>
 						<div v-show='[0,3].includes(transaction.type) && transaction.state == 14'>
-							<a :href="'https://explorer.waterfall.network/tx/' + transaction.ethTxHash" target="_blank" rel="noopener noreferrer">Etherscan</a>
+							<a :href="'https://explorer.waterfall.network/tx/' + transaction.ethTxHash" target="_blank" rel="noopener noreferrer">Waterwall</a>
 						</div>
 					</td>
 					<td>
@@ -278,7 +278,7 @@
 						<span v-show='transaction.type == 1 && transaction.state > 60'> {{ transaction.confirmations }}  </span>
 					</a>
 					<div v-show='[0,3].includes(transaction.type) && transaction.state == 14'>
-						<a :href="'https://explorer.waterfall.network/tx/' + transaction.ethTxHash" target="_blank" rel="noopener noreferrer">Etherscan</a>
+						<a :href="'https://explorer.waterfall.network/tx/' + transaction.ethTxHash" target="_blank" rel="noopener noreferrer">Waterwall</a>
 					</div>
 				</div>
 				<div>
