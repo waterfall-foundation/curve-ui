@@ -118,10 +118,6 @@
                             </span>
                         </label>
                     </li>
-                    <li>
-                        <input id='swapw' type='checkbox' name='swapw' v-model = 'swapwrapped'>
-                        <label for='swapw' v-show = "!['susdv2', 'tbtc', 'ren', 'sbtc'].includes(currentPool)">Swap wrapped</label>
-                    </li>
                 </ul>
                 <p class='trade-buttons' v-show="['ren', 'sbtc'].includes(currentPool)">
                     <a href='https://bridge.renproject.io/'>Mint/redeem renBTC</a>
