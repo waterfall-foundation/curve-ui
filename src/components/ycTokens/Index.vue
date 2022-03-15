@@ -64,7 +64,7 @@
 	import { approveAmount } from '../../utils/common'
 
 	export default {
-		data: () => ({
+ 		data: () => ({
 			ycTokens: [
 				//{	
 					//name

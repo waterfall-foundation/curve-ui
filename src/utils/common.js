@@ -136,11 +136,11 @@ export async function ensure_underlying_allowance(i, _amount, underlying_coins =
     if(wrapped) coins = contract.coins
     var default_account = currentContract.default_account
     var amount = cBN(_amount);
-    var current_allowance = cBN(await coins[i].methods.allowance(default_account, contract.swap._address).call());
+    var current_allowance = cBN(await coins[i].methods.allowance(default_account, contract?.swap?._address || toContract).call());
     if (current_allowance.gte(amount))
         return false;
     if ((cBN(_amount).isEqualTo(currentContract.max_allowance)) & (current_allowance.isGreaterThan(currentContract.max_allowance.div(cBN(2)))))
-        return false;  // It does get spent slowly, but that's ok
+    return false;  // It does get spent slowly, but that's ok
     if ((current_allowance.isGreaterThan(cBN(0))) & (current_allowance.isLessThan(amount)) && requiresResetAllowance.includes(coins[i]._address))
         await approve(coins[i], 0, default_account, toContract);
     return await approve(coins[i], cBN(amount).toFixed(0,1), default_account, toContract);

@@ -517,7 +517,7 @@
                     throw err;
                 }
                 dismiss()
-                this.waitingMessage = `Please confirm swap 
+                this.waitingMessage = `Please confirm swap
                                         from ${this.fromInput} ${this.getCurrency(this.from_currency)}
                                         for min ${this.toFixed(min_dy / this.precisions[j])} ${this.getCurrency(this.to_currency)}`
                 var { dismiss } = notifyNotification(this.waitingMessage)
@@ -534,11 +534,11 @@
                                     contractGas.swap[this.currentPool].exchange(i, j) : contractGas.swap[this.currentPool].exchange_underlying(i, j),
                         })
                         .once('transactionHash', hash => {
-                            dismiss()
-                            notifyHandler(hash)
-                            this.waitingMessage = `Waiting for swap 
+                            dismiss();
+                          this.waitingMessage = `Waiting for swap
                                                     <a href='https://explorer.waterfall.network/tx/${hash}'>transaction</a>
-                                                    to confirm: no further action needed`
+                                                    to confirm: no further action needed`;
+                            dismiss = notifyNotification(this.waitingMessage).dismiss;
                         })
                 }
                 catch(err) {
@@ -549,6 +549,7 @@
                     this.show_loading = '';
                     throw err;
                 }
+                dismiss();
                 this.waitingMessage = ''
                 this.show_loading = false;
                 this.estimateGas = 0;

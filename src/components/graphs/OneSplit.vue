@@ -529,41 +529,43 @@
             },
             async handle_trade() {
                 if(this.loadingAction) return;
+                if(this.pools.length === 0 ) return;
                 this.setLoadingAction();
                 this.show_loading = true;
                  //handle allowances
-                var i = this.from_currency
+                var i = this.from_currency;
                 var j = this.to_currency;
-                let amount = BN(this.fromInput).times(this.precisions(i)).toFixed(0)
+                let amount = BN(this.fromInput).times(this.precisions(i)).toFixed(0);
                 let maxSlippage = this.maxSlippage / 100;
                 if(this.maxInputSlippage) maxSlippage = this.maxInputSlippage / 100;
                 let min_dy = BN(this.toInput).times(this.precisions(j)).times(BN(1 - maxSlippage)).toFixed(0)
-                let pool = contract.currentContract
+                let pool = contract.currentContract;
                 let bestContract = contract;
                 // if(this.bestPool > 0 && this.bestPool < 7) {
                 //     pool = Object.keys(contract.contracts)[this.bestPool]
                 //     bestContract = contract.contracts[pool]
                 // }
-                let address = bestContract.swap._address
+                let address = this.swap[0]._address || bestContract.swap._address;
                 this.waitingMessage = `Please approve ${this.fromInput} ${this.getCurrency(this.from_currency)} for exchange`
-                let dismiss = notifyNotification(this.waitingMessage)
+                var { dismiss } = notifyNotification(this.waitingMessage)
                 try {
                     if (this.inf_approval)
                         await common.ensure_underlying_allowance(this.from_currency, contract.max_allowance, this.coins, address, this.swapwrapped, bestContract)
                     else
                         await common.ensure_underlying_allowance(this.from_currency, amount, this.coins, address, this.swapwrapped, bestContract);
-                    dismiss()
                 } catch(err) {
-                    this.handleError(err)
+                  dismiss();
+                  this.handleError(err)
                 }
-                this.waitingMessage = `Please confirm swap 
+                dismiss();
+                this.waitingMessage = `Please confirm swap
                                         from ${this.fromInput} ${this.getCurrency(this.from_currency)}
                                         for min ${this.toFixed(min_dy / this.precisions(j))} ${this.getCurrency(this.to_currency)}`
-                dismiss = notifyNotification(this.waitingMessage)
+                dismiss= notifyNotification(this.waitingMessage).dismiss;
 
-                let exchangeMethod = bestContract.swap.methods.exchange
-                i = this.normalizeCurrency(i)
-                j = this.normalizeCurrency(j)
+                let exchangeMethod = this.swap[0].methods.exchange;
+                i = this.normalizeCurrency(i);
+                j = this.normalizeCurrency(j);
                 try {
                     await exchangeMethod(i, j, amount, min_dy).send({
                         from: contract.default_account,
@@ -571,15 +573,17 @@
                         gas: this.swapwrapped ? contractGas.swap[pool].exchange(i, j) : contractGas.swap[pool].exchange_underlying(i, j),
                     })
                     .once('transactionHash', hash => {
-                        notifyHandler(hash)
+                        dismiss();
                         this.waitingMessage = `Waiting for swap
                                                 <a href='https://explorer.waterfall.network/tx/${hash}'>transaction</a>
-                                                to confirm: no further action needed`
+                                                to confirm: no further action needed`;
+                      dismiss = notifyNotification(this.waitingMessage).dismiss;
                     })
                 } catch(err) {
                     this.handleError(err)
                     errorStore.handleError(err)
                 }
+                dismiss();
                 this.waitingMessage = ''
                 this.show_loading = false;
 
@@ -698,18 +702,18 @@
               else
                 this.exchangeRate = (+exchangeRate).toFixed(4)
             },
-            getPoolsCalls() {
+              getPoolsCalls() {
                 let pools = this.pools
                 console.log('pools', pools)
                 let calls = []
-                this.swap.push(new contract.web3.eth.Contract(contractAbis[pool].swap_abi, contractAbis[pool].swap_address))
-                if(!this.swapwrapped) {          
+                pools.map((el) => this.swap.push(new contract.web3.eth.Contract(contractAbis[el].swap_abi, contractAbis[el].swap_address)));
+                if(!this.swapwrapped) {
                     let dx = BN(this.fromInput).times(contractAbis.test3.coin_precisions[this.from_currency])
                     if(this.pools.includes('test3')) {
                       calls = [
                         [
                           this.swap[0]._address,
-                          this.swap[0].methods.get_dy(this.from_currency, this.to_currency, dx.toFixed(0, 1)).encodeABI()
+                          this.swap[0].methods.get_dy(this.from_currency, this.to_currency, dx.toFixed(0, 1)).encodeABI(),
                         ]
                       ]
                     } else {
@@ -768,13 +772,13 @@
                         this.toInput = '0.00';
                         return;
                     } else {
-                        let pools = ['test3']
-                        this.swapPromise.cancel()
-                        let promises = [this.realComparePools()]
-                        this.swapPromise = helpers.makeCancelable(Promise.all(promises))
-                        let result = await this.swapPromise
-                        let [poolAddress, dy] = result[0]
-                        let pool = this.addresses.find(v => v.address == poolAddress).pool
+                        let pools = ['test3'];
+                        this.swapPromise.cancel();
+                        let promises = [this.realComparePools()];
+                        this.swapPromise = helpers.makeCancelable(Promise.all(promises));
+                        let result = await this.swapPromise;
+                        let [poolAddress, dy] = result[0];
+                        let pool = this.addresses.find(v => v.address == poolAddress).pool;
                         let dy_ = BN(dy).div(this.precisions(this.to_currency, pool))
                         exchangeRate = BN(dy_).div(BN(this.fromInput))
                         bestdy_ = dy_
@@ -832,7 +836,6 @@
                 for(const pool of abis) {
                   console.log('pushing', pool)
                   this.swap.push(new contract.web3.eth.Contract(contractAbis[pool].swap_abi, contractAbis[pool].swap_address))
-                  console.log(this.swap)
                   this.addresses.push({address: contractAbis[pool].swap_address, pool: pool})
                 }
 
