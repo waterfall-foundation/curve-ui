@@ -184,7 +184,7 @@
 <script>
 	export default {
 		metaInfo: {
-	      title: 'Curve.fi :: Integrations',
+	      title: 'Curve Waterfall Interface :: Integrations',
 	      meta: [
 	        {'property': 'og:title', 'content': 'curve.fi/integrations'},
 	        {'property': 'og:url', 'content': 'https://curve.fi/integrations'},

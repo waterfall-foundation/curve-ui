@@ -35,7 +35,7 @@
 <script>
 	export default {
 		metaInfo: {
-	      title: 'Curve.fi :: DAO Audits',
+	      title: 'Curve Waterfall Interface :: DAO Audits',
 	      meta: [
 	        {'property': 'og:title', 'content': 'curve.fi/curve_audits'},
 	        {'property': 'og:url', 'content': 'https://curve.fi/curve_audits'},

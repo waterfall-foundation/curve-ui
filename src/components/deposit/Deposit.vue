@@ -500,7 +500,6 @@ export default {
           Vue.set(this.amounts, i, BN(this.inputs[i]).div(currentContract.c_rates[i]).toFixed(0, 1))
         }
       })
-      console.log('this.transferableBalance', this.transferableBalance)
       this.amounts = this.amounts.map(v => v || 0)
       let total_supply = +decoded[decoded.length - 1];
       this.waitingMessage = 'Please approve spending your coins'
@@ -580,6 +579,7 @@ export default {
             currentContract.coins.map(c => c._address), 'coins', currentContract.underlying_coins.map(uc => uc._address), 'underlying_coins',
             currentContract.virtual_price, 'virtual_price', token_amount, 'token_amount', Date.now())
         this.waitingMessage = 'Please confirm deposit transaction'
+        var {dismiss} = notifyNotification(this.waitingMessage)
         await helpers.setTimeoutPromise(100)
         let add_liquidity = currentContract.swap.methods.add_liquidity(amounts, token_amount).send({
           from: currentContract.default_account,
@@ -587,15 +587,17 @@ export default {
           gas: gas,
         })
             .once('transactionHash', hash => {
-              notifyHandler(hash)
+              dismiss();
               this.waitingMessage = `Waiting for deposit
                             <a href='http://explorer.waterfall.network/tx/${hash}'>transaction</a>
                             to confirm ${stake ? 'before staking (1/2)' : 'no further action required'}`
+              dismiss = notifyNotification(this.waitingMessage).dismiss;
               console.warn(hash, 'tx hash')
             })
         try {
           receipt = await add_liquidity
         } catch (err) {
+          dismiss();
           console.error(err)
           errorStore.handleError(err)
           if (err.code == -32603) {
@@ -604,6 +606,7 @@ export default {
           }
         }
       }
+      dismiss()
       this.waitingMessage = ''
       if (!stake) this.show_loading = false
       if (stake && ['susdv2', 'sbtc'].includes(this.currentPool)) {

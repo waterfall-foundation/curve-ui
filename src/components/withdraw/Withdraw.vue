@@ -534,7 +534,11 @@
                             })
                             .once('transactionHash', hash => {
                                 dismiss()
-                                notifyHandler(hash)
+                              this.waitingMessage =
+                                  `Waiting for deposit
+                            <a href='http://explorer.waterfall.network/tx/${hash}'>transaction</a>
+                            to confirm`
+                              dismiss = notifyNotification(this.waitingMessage).dismiss;
                                 resolve()
                             })
                             .on('receipt', () => this.pendingSNXRewards = 0)
@@ -543,9 +547,9 @@
                                 dismiss()
                                 reject(err)
                             })
-                    })
+                    });
+                  dismiss();
                 }
-
                 if(this.currentPool == 'sbtc' && !claim_bpt_only || !unstake) {
                     this.estimateGas = 300000
 
@@ -559,14 +563,19 @@
                         })
                         .once('transactionHash', hash => {
                             dismiss()
-                            notifyHandler(hash)
+                          this.waitingMessage =
+                              `Waiting for deposit
+                            <a href='http://explorer.waterfall.network/tx/${hash}'>transaction</a>
+                            to confirm`
+                          dismiss = notifyNotification(this.waitingMessage).dismiss;
                         })
                     }
                     catch(err) {
-                        console.log(err)
-                        dismiss()
-                        errorStore.handleError(err)
+                        console.log(err);
+                        dismiss();
+                        errorStore.handleError(err);
                     }
+                    dismiss();
                 }
 
                 this.show_loading = false
@@ -597,16 +606,20 @@
                                 gas: 125000,
     						})
     						.once('transactionHash', hash => {
-                                this.waitingMessage = 'Waiting for unstake transaction to confirm'
+                  this.waitingMessage =
+                      `Waiting for deposit
+                            <a href='http://explorer.waterfall.network/tx/${hash}'>transaction</a>
+                            to confirm`
                                 dismiss()
-                                notifyHandler(hash)
-                                resolve()
+                  dismiss = notifyNotification(this.waitingMessage).dismiss;
+                  resolve()
                             })
                             .catch(err => {
                                 dismiss()
                                 reject(err)
                             })
     				})
+                  dismiss();
                     if(exit) {
         				this.claim_SNX()
                     }
@@ -717,9 +730,12 @@
                                 gas: gas,
     				        }).once('transactionHash', hash => {
                                 dismiss()
-                                notifyHandler(hash)
-                                this.waitingMessage = 'Waiting for withdrawal to confirm: no further action needed'
-                            })
+                      this.waitingMessage =
+                          `Waiting for deposit
+                            <a href='http://explorer.waterfall.network/tx/${hash}'>transaction</a>
+                            to confirm: no further action needed`
+                      dismiss = notifyNotification(this.waitingMessage).dismiss;
+                     })
                         }
                         catch(err) {
                             console.error(err)
@@ -729,6 +745,7 @@
                             this.show_loading = false
                             throw err;
                         }
+                        dismiss();
 			    	}
 			        else {
 			        	let inputs = this.inputs;
@@ -754,10 +771,13 @@
                                 gasPrice: this.gasPriceWei,
                                 gas: gas,
     				        }).once('transactionHash', hash => {
-                                dismiss()
-                                notifyHandler(hash)
-                                this.waitingMessage = 'Waiting for withdrawal to confirm: no further action needed'
-                            })
+                      dismiss()
+                      this.waitingMessage =
+                          `Waiting for deposit
+                            <a href='http://explorer.waterfall.network/tx/${hash}'>transaction</a>
+                            to confirm: no further action needed`;
+                      dismiss = notifyNotification(this.waitingMessage).dismiss;
+                    })
                         }
                         catch(err) {
                             console.error(err)
@@ -767,6 +787,7 @@
                             this.show_loading = false;
                             throw err;
                         }
+                        dismiss();
 			        }
 			    }
 			    else {
@@ -843,10 +864,10 @@
                             })
                             .once('transactionHash', hash => {
                                 dismiss()
-                                notifyHandler(hash)
-                                this.waitingMessage = `Waiting for withdrawal 
+                                this.waitingMessage = `Waiting for withdrawal
                                 <a href='https://explorer.waterfall.network/tx/${hash}'>transaction</a>
-                                to confirm: no further action needed`
+                                to confirm: no further action needed`;
+                              dismiss = notifyNotification(this.waitingMessage).dismiss;
                             });
                         }
                         catch(err) {
@@ -857,6 +878,7 @@
                             this.show_loading = false
                             throw err;
                         }
+                        dismiss();
 			        }
 			        else {
                         try {
@@ -882,10 +904,11 @@
                             })
                             .once('transactionHash', hash => {
                                 dismiss()
-                                notifyHandler(hash)
                                 this.waitingMessage = `Waiting for withdrawal 
                                 <a href='https://explorer.waterfall.network/tx/${hash}'>transaction</a>
                                 to confirm: no further action needed`
+                                dismiss = notifyNotification(this.waitingMessage).dismiss;
+
                             });
                         }
                         catch(err) {
@@ -896,6 +919,7 @@
                             this.show_loading = false
                             throw err;
                         }
+                        dismiss();
 			        }
 			    }
 			    if(this.share == '---') {
@@ -1014,9 +1038,13 @@
                         gas: gas,
                     })
                     .once('transactionHash', hash => {
-                        dismiss()
-                        notifyHandler(hash)
+                        dismiss();
+                        this.waitingMessage = `Waiting for deposit to PAX
+                                <a href='https://explorer.waterfall.network/tx/${hash}'>transaction</a>
+                                to confirm: no further action needed`
                         this.waitingMessage = `Waiting for deposit to PAX transaction to confirm no further action required`
+                        dismiss = notifyNotification(this.waitingMessage).dismiss;
+
                     })
                 }
                 catch(err) {
