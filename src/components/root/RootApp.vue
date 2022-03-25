@@ -7,14 +7,12 @@
       <div class='poolsdropdown'>
         <button class='simplebutton'>☰</button>
         <div class='dropdown'>
-           <!--  <a :href="'//compound.localhost:8080'+$route.path" :class="{selected: currentPool == 'compound'}" @click="changePools('compound')">Compound</a>
-            <a :href="'//usdt.localhost:8080'+$route.path" :class="{selected: currentPool == 'usdt'}" @click="changePools('usdt')">USDT</a>
-            <a :href="'//y.localhost:8080'+$route.path" :class="{selected: currentPool == 'iearn'}" @click="changePools('iearn')">Y</a>
-            <a :href="'//busd.localhost:8080'+$route.path" :class="{selected: currentPool == 'busd'}" @click="changePools('busd')">bUSD</a> -->
-
 <!--            <router-link :to="'/compound/' + ($route.path.split('/')[2] || '')  ">Compound</router-link>-->
             <router-link :to="'/test3/' + ($route.path.split('/')[2] || '')  ">Test Pool</router-link>
-            <p>____________</p>
+            <a href="https://waterfall.foundation/" target="_blank">About Protocol</a>
+            <a href="https://waterfall.foundation/uniswap/" target="_blank">Manual</a>
+
+          <p>____________</p>
             <button class='simplebutton' @click = 'changeWallets'>Change wallet</button>
 <!--            <button id='changeAccounts' class='simplebutton' -->
 <!--              @click = 'changeAccounts'>Change accounts</button>-->
@@ -22,8 +20,7 @@
       </div>
 
       <router-link to="/">Home</router-link>
-<!--      <router-link to="/trade">Trade</router-link>-->
-<!--      <div class='poolsdropdown'>-->
+       <!--      <div class='poolsdropdown'>-->
 <!--        <router-link to="/combinedstats">Stats</router-link>-->
 <!--        <div class='dropdown'>-->
 <!--          <router-link to="/combinedstats">Stats</router-link>-->
@@ -46,7 +43,6 @@
 <!--      <router-link to="/rootfaq" class='showmobile'>FAQ</router-link>-->
 <!--      <router-link to="/integrations" class='showmobile'>Integrations</router-link>-->
 <!--      <router-link to="/donate" class='showmobile'>Donate</router-link>-->
-<!--      <a href='https://guides.curve.fi' rel='noopener noreferrer' class='showmobile'>Guides</a>-->
 <!--      <a href="https://twitter.com/CurveFinance" class='showmobile' rel='noopener noreferrer'>#Twitter</a>-->
 <!--      <a href="https://t.me/curvefi" class='showmobile' rel='noopener noreferrer'>@Telegram</a>-->
 <!--      <a href="https://explore.duneanalytics.com/public/dashboards/RTH47mNjQcoLv5oG0HMDdI0iDq7BHxk1PzCRdwQB" class='showmobile' rel='noopener noreferrer'>Dune Analytics</a>-->
@@ -75,7 +71,7 @@
 
   export default {
     metaInfo: {
-      title: 'Curve.fi',
+      title: 'Curve Waterfall Interface',
       meta: [
         {'property': 'og:title', 'content': 'curve.fi'},
         {'property': 'og:url', 'content': 'https://curve.fi'},

@@ -72,7 +72,7 @@
 			},
 		},
 		metaInfo: {
-	      title: 'Curve.fi :: Contracts',
+	      title: 'Curve Waterfall Interface :: Contracts',
 	      meta: [
 	        {'property': 'og:title', 'content': 'beta.curve.fi/contracts'},
 	        {'property': 'og:url', 'content': 'https://curve.fi/contracts'},
