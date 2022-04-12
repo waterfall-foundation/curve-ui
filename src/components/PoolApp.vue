@@ -132,8 +132,7 @@
         return process.env.BASE_URL
       },
       logoSrc() {
-        if(!currentContract.swapbtc) return this.publicPath + 'logo_optimized.svg'
-        else return this.publicPath + 'logo_ren_beta_optimized.svg'
+        if(!currentContract.swapbtc) return this.publicPath + 'logo_optimized.png'
       },
       hasConnectedWallet() {
         return this.default_account == '0x0000000000000000000000000000000000000000'
