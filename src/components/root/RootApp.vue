@@ -100,7 +100,6 @@
       },
       logoSrc() {
         if(!currentContract.swapbtc) return this.publicPath + 'logo_optimized.png'
-        else return this.publicPath + 'logo_ren_beta_optimized.svg'
       },
       hasConnectedWallet() {
         return this.default_account == '0x0000000000000000000000000000000000000000' 
