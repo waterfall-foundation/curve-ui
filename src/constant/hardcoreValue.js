@@ -1,0 +1,67 @@
+export const ETH_ETHEREUM = {
+    "id":"eth-ethereum",
+    "name":"Ethereum",
+    "symbol":"ETH",
+    "rank":2,
+    "circulating_supply":120346430,
+    "total_supply":120346475,
+    "max_supply":0,
+    "beta_value":1.12486,
+    "first_data_at":"2015-08-07T00:00:00Z",
+    "last_updated":"2022-04-12T10:36:57Z",
+    "quotes":{
+        "USD":{
+            "price":3020.8468981442115,
+            "volume_24h":27799152226.60401,
+            "volume_24h_change_24h":33.28,
+            "market_cap":363548139768,
+            "market_cap_change_24h":-1.4,
+            "percent_change_15m":0.04,
+            "percent_change_30m":-0.19,
+            "percent_change_1h":-0.2,
+            "percent_change_6h":0.84,
+            "percent_change_12h":0.5,
+            "percent_change_24h":-1.41,
+            "percent_change_7d":-14.12,
+            "percent_change_30d":16.6,
+            "percent_change_1y":36.87,
+            "ath_price":4864.1131966142,
+            "ath_date":"2021-11-10T16:06:16Z",
+            "percent_from_price_ath":-37.9
+        }
+    }
+};
+
+export const BTC_BITCOIN = {
+    "id":"btc-bitcoin",
+    "name":"Bitcoin",
+    "symbol":"BTC",
+    "rank":1,
+    "circulating_supply":19009606,
+    "total_supply":19009606,
+    "max_supply":21000000,
+    "beta_value":0.901062,
+    "first_data_at":"2010-07-17T00:00:00Z",
+    "last_updated":"2022-04-12T10:49:57Z",
+    "quotes":{
+        "USD":{
+            "price":40225.877227674864,
+            "volume_24h":40916088035.90762,
+            "volume_24h_change_24h":35.46,
+            "market_cap":764678077102,
+            "market_cap_change_24h":-2.76,
+            "percent_change_15m":0.05,
+            "percent_change_30m":0.11,
+            "percent_change_1h":0.06,
+            "percent_change_6h":0.04,
+            "percent_change_12h":0.2,
+            "percent_change_24h":-2.77,
+            "percent_change_7d":-14.03,
+            "percent_change_30d":2.69,
+            "percent_change_1y":-36,
+            "ath_price":68692.137036932,
+            "ath_date":"2021-11-10T16:51:15Z",
+            "percent_from_price_ath":-41.44
+        }
+    }
+};

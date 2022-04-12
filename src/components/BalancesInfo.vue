@@ -214,10 +214,10 @@
       },
       async updateShares() {
         if(!(this.usdShare1 > 0 || (['susdv2', 'sbtc'].includes(this.currentPool) && this.usdStake1) > 0)) return;
-        let pool = this.currentPool
-        let req = await fetch(`${window.domain}/raw-stats/${pool}-1m.json`)
-        this.lastPoint = await req.json()
-        this.lastPoint = this.lastPoint[this.lastPoint.length - 1]
+        //let pool = this.currentPool
+        //let req = await fetch(`${window.domain}/raw-stats/${pool}-1m.json`)
+        //this.lastPoint = await req.json()
+        //this.lastPoint = this.lastPoint[this.lastPoint.length - 1]
         let N_COINS = allabis[this.currentPool].N_COINS;
         this.realShare = 0;
         this.realStake = 0;
@@ -249,24 +249,24 @@
     },
     async created() {
       let key = this.currentPool
-      let volume = volumeStore.state.volumes[key][0] || 0
+      //let volume = volumeStore.state.volumes[key][0] || 0
       if(this.isBTC) {
         this.btcPrice = await priceStore.getBTCPrice()
       }
-      if(volume == -1) {
-        let stats = await fetch(`${window.domain}/raw-stats/apys.json`)
-        stats = await stats.json()
-        for(let [key, value] of Object.entries(volumeStore.state.volumes)) {
-          if(volumeStore.state.volumes[key][0] == -1) {
-            let volume = key == 'ren' ? stats.volume.ren2 : key == 'sbtc' ? stats.volume.rens : stats.volume[key]
-            Vue.set(volumeStore.state.volumes[key], 0,  volume || 0)
-            if(['tbtc', 'ren', 'sbtc'].includes(key)) {
-              Vue.set(volumeStore.state.volumes[key], 0,  volume * this.btcPrice || 0)
-              Vue.set(volumeStore.state.volumes[key], 1,  volume || 0)
-            }
-          }
-        }
-      }
+      //if(volume == -1) {
+      //  let stats = await fetch(`${window.domain}/raw-stats/apys.json`)
+      //  stats = await stats.json()
+      //  for(let [key, value] of Object.entries(volumeStore.state.volumes)) {
+      //    if(volumeStore.state.volumes[key][0] == -1) {
+      //     let volume = key == 'ren' ? stats.volume.ren2 : key == 'sbtc' ? stats.volume.rens : stats.volume[key]
+      //      Vue.set(volumeStore.state.volumes[key], 0,  volume || 0)
+      //      if(['tbtc', 'ren', 'sbtc'].includes(key)) {
+      //        Vue.set(volumeStore.state.volumes[key], 0,  volume * this.btcPrice || 0)
+      //        Vue.set(volumeStore.state.volumes[key], 1,  volume || 0)
+      //      }
+      //    }
+      //  }
+      //}
       this.hasLoadedInfo && this.updateShares()
       this.$watch(() => this.hasLoadedInfo, val => this.updateShares())
     },

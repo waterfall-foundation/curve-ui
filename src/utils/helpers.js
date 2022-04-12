@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import {ETH_ETHEREUM} from "@/constant/hardcoreValue";
 
 Vue.filter('capitalize', capitalize)
 
@@ -210,8 +211,7 @@ export function formatNumber(number, dec = 2, dsep, tsep) {
 }
 
 export async function getETHPrice() {
-  let req = await fetch('https://api.coinpaprika.com/v1/tickers/eth-ethereum');
-  let res = await req.json()
+  let res = await JSON.parse(JSON.stringify(ETH_ETHEREUM));
   return res.quotes.USD.price
 }
 

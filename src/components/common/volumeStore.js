@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import abis from '../../allabis'
+import {BTC_BITCOIN} from "@/constant/hardcoreValue";
 
 	let initState = () => ({
 		test3: [],
@@ -36,11 +37,11 @@ export async function fetchVolumeData(pools, refresh = false, period = 5) {
 	if(!Array.isArray(pools)) pools = [pools]
 	if(!refresh) pools = pools.filter(pool => !state.volumeData[period][pool].length)
 	//pools = pools.filter(pool => !['tbtc'].includes(pool))
-	let requests = pools.map(p => {
-		if(p == 'ren') p = 'ren2'
-		if(p == 'sbtc') p = 'rens'
-		return fetch(`${window.domain}/raw-stats/${p}-${period}m.json`)
-	})
+	//let requests = pools.map(p => {
+	//	if(p == 'ren') p = 'ren2'
+	//	if(p == 'sbtc') p = 'rens'
+	//	return fetch(`${window.domain}/raw-stats/${p}-${period}m.json`)
+	//})
 
 	//will work for 17 days on 5 minutes chart
 	if(pools.includes('tbtc') || pools.includes('ren') || pools.includes('sbtc'))
@@ -67,8 +68,7 @@ export async function getVolumes(pools, refresh = false) {
 	if(!Array.isArray(pools)) pools = [pools]
 	pools = pools.map(p => p == 'iearn' ? 'y' : p == 'susdv2' ? 'susd' : p == 'ren' ? 'ren2' : p == 'sbtc' ? 'rens' : p)
 	if(Object.values(state.volumes).filter(v=>v[0]!=-1).length == pools.length && !refresh) return;
-	let req = await Promise.all([fetch(`${window.domain}/raw-stats/apys.json`), fetch(`https://api.coinpaprika.com/v1/tickers/btc-bitcoin`)])
-	let [stats, btcPrice] = await Promise.all(req.map(r => r.json()))
+	let [stats, btcPrice] = await JSON.parse(JSON.stringify(BTC_BITCOIN));
     btcPrice = btcPrice.quotes.USD.price
     for(let [pool, volume] of Object.entries(state.volumes)) {
     	if(volume[0] == -1) {

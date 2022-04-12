@@ -3,6 +3,7 @@ import { getters, contract as currentContract } from '../contract'
 import allabis, { balancer_ABI, balancer_address } from '../allabis'
 
 import BigNumber from 'bignumber.js'
+import {BTC_BITCOIN} from "@/constant/hardcoreValue";
 var cBN = (val) => new BigNumber(val);
 
 export default {
@@ -82,9 +83,8 @@ export default {
 		},
 
 		async getBTCPrice() {
-			let req = await fetch(`https://api.coinpaprika.com/v1/tickers/btc-bitcoin`);
-        	let res = await req.json();
-        	this.btcPrice = res.quotes.USD.price
+			let res = await JSON.parse(JSON.stringify(BTC_BITCOIN));
+			this.btcPrice = res.quotes.USD.price
 		},
 
 		async getSNXRewards() {
