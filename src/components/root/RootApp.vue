@@ -99,7 +99,7 @@
         return process.env.BASE_URL
       },
       logoSrc() {
-        if(!currentContract.swapbtc) return this.publicPath + 'logo_optimized.svg'
+        if(!currentContract.swapbtc) return this.publicPath + 'logo_optimized.png'
         else return this.publicPath + 'logo_ren_beta_optimized.svg'
       },
       hasConnectedWallet() {
