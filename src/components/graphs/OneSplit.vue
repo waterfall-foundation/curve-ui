@@ -580,8 +580,9 @@
                       dismiss = notifyNotification(this.waitingMessage).dismiss;
                     })
                 } catch(err) {
-                    this.handleError(err)
-                    errorStore.handleError(err)
+                    dismiss();
+                    this.handleError(err);
+                    errorStore.handleError(err);
                 }
                 dismiss();
                 this.waitingMessage = ''
