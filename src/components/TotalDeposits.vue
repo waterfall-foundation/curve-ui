@@ -45,6 +45,7 @@
 	import * as helpers from '../utils/helpers'
 
 	import { contract } from '../contract'
+  import {BTC_BITCOIN} from "@/constant/hardcoreValue";
 
 	export default {
 		components: {
@@ -283,8 +284,7 @@
 			let pools = Object.keys(allabis).filter(pool => pool != 'susd' && pool != 'y' && pool != 'tbtc')
 			await volumeStore.fetchVolumeData(pools, true, 1440)
 			let data = volumeStore.state.volumeData[1440]
-			let btcPrices = await helpers.retry(fetch(`https://api.coinpaprika.com/v1/tickers/btc-bitcoin/historical?start=1589587198&interval=1d&limit=5000`))
-			btcPrices = await btcPrices.json()
+			let btcPrices = await JSON.parse(JSON.stringify(BTC_BITCOIN));
 			for(let btcPool of ['ren', 'sbtc']) {
 				data[btcPool] = data[btcPool].map(d => {
 					d.balances = d.balances.map(bal => bal * volumeStore.findClosestPrice(d.timestamp, btcPrices))

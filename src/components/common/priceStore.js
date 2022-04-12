@@ -1,12 +1,11 @@
-import * as helpers from '../../utils/helpers'
+import {BTC_BITCOIN} from "@/constant/hardcoreValue";
 
 export let state = {
 	btcPrice: null,
 }
 
 export async function getBTCPrice() {
-	let req = await helpers.retry(fetch(`https://api.coinpaprika.com/v1/tickers/btc-bitcoin`), 300);
-    let res = await req.json();
+    let res = await JSON.parse(JSON.stringify(BTC_BITCOIN));
     state.btcPrice = res.quotes.USD.price;
     return res.quotes.USD.price
 }
